@@ -1,0 +1,22 @@
+create table User_profile (
+	username varchar(30) primary key,
+	password varchar(20),
+	email varchar(50),
+	gender varchar(10),
+	times timestamp,
+	birthday integer,
+	birthmonth integer,
+	birthyear integer,
+	picture text,
+	unique (email)
+);
+
+create table Friendship(
+	profile_accept varchar(30) not null,
+	profile_request varchar(30) not null,
+	foreign key(profile_accept) 
+		references user_profile(username),
+	foreign key(profile_request) 
+		references user_profile(username),
+	primary key (profile_accept, profile_request)
+);
