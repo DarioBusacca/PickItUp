@@ -2,11 +2,11 @@
 function controllaNome(){
 	var v = parseInt(document.myForm.nome.value);
 	if(!isNaN(v)) {
-		alert("Il nome non può essere un numero");
+		alert("Il nome non può essere un numero!");
 		return false;
 	}
 	if(document.myForm.nome.value == ""){
-		alert("Non hai inserito il nome");
+		alert("Non hai inserito il nome!");
 		return false;
 	}
 	return true;
@@ -14,11 +14,11 @@ function controllaNome(){
 function controllaUsername(){
 	var v = parseInt(document.myForm.username.value);
 	if(!isNaN(v)) {
-		alert("L'username non può essere un numero");
+		alert("L'username non può essere un numero!");
 		return false;
 	}
 	if(document.myForm.username.value == ""){
-		alert("Non hai inserito l'username");
+		alert("Non hai inserito l'username!");
 		return false;
 	}
 	return true;
@@ -30,7 +30,7 @@ function controllaCognome(){
 		return false;
 	}
 	if(document.myForm.cognome.value == ""){
-		alert("Non hai inserito il cognome");
+		alert("Non hai inserito il cognome!");
 		return false;
 	}
 	return true;
@@ -38,11 +38,11 @@ function controllaCognome(){
 function controllaEmail(){
 	var v = parseInt(document.myForm.email.value);
 	if(!isNaN(v)) {
-		alert("La email non può essere un numero");
+		alert("La email non può essere un numero!");
 		return false;
 	}
 	if(document.myForm.email.value == ""){
-		alert("Non hai inserito l'email");
+		alert("Non hai inserito l'email!");
 		return false;
 	}
 	return true;
@@ -50,11 +50,11 @@ function controllaEmail(){
 function controllaPassword(){
 	var v = document.myForm.password.value;
 	if(v.length < 10){
-		alert("La password deve essere lunga almeno 10 caratteri alfanumerici");
+		alert("La password deve essere lunga almeno 10 caratteri alfanumerici!");
 		return false;
 	}
 	if(v == ""){
-		alert("Non hai inserito la password");
+		alert("Non hai inserito la password!");
 		return false;
 	}
 	
@@ -76,6 +76,6 @@ function validaForm(){
 	ret = controllaPassword();
 	if(!ret)
 		return false;
-	alert("I dati sono stati inseriti correttamente");
+	alert("I dati sono stati inseriti correttamente!");
 	return true;
 }

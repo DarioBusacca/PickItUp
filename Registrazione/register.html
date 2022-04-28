@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PickItUp | Register</title>
+	<meta name="viewport" content="width=device-width, initial-scale=2.0">
+	<title>PickItUp | SignUp</title>
 	<link rel="stylesheet" type="text/css" href="reg-style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,26 +16,26 @@
 		<form flex="1" action="validateRegistration.php" class="form-signin" 
                 method="POST" name="myForm" onSubmit="return validaForm();">
            
-            <input type="text" class="nome" placeholder="Insert Name" name="nome" size="30" maxlength="30"><br>
+            <input type="text" placeholder="Insert Name" name="nome" size="30" maxlength="30" onchange="return controllaNome();"><br>
 
-            <input type="text" class="cognome"placeholder="Insert LastName"name="cognome" size="30" maxlength="30"><br>
+            <input type="text" placeholder="Insert LastName"name="cognome" size="30" maxlength="30" onchange="return controllaCognome();"><br>
             
-            <input type="text" class="username" placeholder="Insert Username" name="username" size="30" maxlength="30"><br>
+            <input type="text"  placeholder="Insert Username" name="username" size="30" maxlength="30" onchange="return controllaUserName();"><br>
             
-            <input type="text" class="email"placeholder="Insert Email" name="email" size="30" maxlength="30"><br>
-            <input type="password" class="password"placeholder="Insert Password" name="password" size="30" maxlength="30"><br>
-            
-            <input type="radio" name="sesso" value="M">M
+            <input type="text" placeholder="Insert Email" name="email" size="30" maxlength="30" onchange="return controllaEmail();"><br>
+            <input type="password" placeholder="Insert Password" name="password" size="30" maxlength="30" onchange="return controllaPassword();"><br>
+            I am:
+            <input type="radio" name="sesso" value="M" checked>M
 			
 			<input type="radio" name="sesso" value="F">F
 			
 			<input type="radio" name="sesso" value="NB">NB<br>
             
-            <label for="birthday"><strong>Birthday:</strong></label><br>
+           Birth Date:
   			
-  			<input type="date" id="birthday" name="birthday"><br>
+  			<input type="date"  name="birthday"><br>
   			
-  			<input type="submit" value="Register" name="reg-button">
+  			<input type="submit" value="SIGN UP" name="reg-button">
         
         </form>
 	</div>

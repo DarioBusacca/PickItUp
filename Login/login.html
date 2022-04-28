@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PickItUp | Login</title>
+	<link rel="stylesheet" type="text/css" href="login-style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="validaform.js"></script>
+</head>
+<body>
+<div class="login">
+	<font size="30px">PickItUp</font>
+	<form flex="1" action="validateLogin.php" class="form-login" method="POST"
+	name="myForm" onsubmit="return validaForm();">
+		<input type="text" name="username" placeholder="Insert User Name" onchange="return controllaUsername();">
+		<br>
+		<input type="password" name="password" placeholder="Insert Password" onchange="return controllaPassword();">
+		<br>
+		Remember me<input type="checkbox" name="remember" checked /><br>
+                
+		<input type="submit" value="LOG IN" name="login-button">
+	</form>
+</div>
+
+</body>
+</html>

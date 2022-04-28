@@ -20,12 +20,13 @@ else {
                 $result=pg_query_params($dbconn, $q1, array($email));
                 if ($line=pg_fetch_array($result, null, PGSQL_ASSOC)) {
                     echo "<h1> Sorry, you are already a registered user</h1>
-                        ";//<a href=../login/index.html> Click here to login </a>
+                        ";
+                    echo "<a href=../Login/login.html> Click here to login </a>";
                 }
                 else {
                     $nome = $_POST['nome'];
                     $cognome = $_POST['cognome'];
-                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    $password = md5($_POST['password']);
                     
                     $dataN = $_POST['birthday'];
                     $username = $_POST['username'];

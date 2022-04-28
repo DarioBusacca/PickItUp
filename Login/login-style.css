@@ -1,4 +1,4 @@
-.signup {
+	.login {
 		display: flex;
   		flex-direction: column;
   		justify-content: center;
@@ -8,7 +8,7 @@
   		font-family: Square Peg;
 
 	}
-	.form-signin{
+	.form-login{
 		border-color: green;
 		border-style: solid;
 		width: 300px;
@@ -30,10 +30,6 @@
   		transition: 0.15s;
   		font-family: Roboto;
   		font-size: 25px;
-
-
-
-
 	}
 	input[type="password"] {
 		margin-top: 3px;
@@ -46,6 +42,7 @@
   		width: 280px;
   		height: 30px;
   		transition: 0.15s;
+  		
   		
 
 	}
