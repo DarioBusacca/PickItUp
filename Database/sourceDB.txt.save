@@ -63,16 +63,7 @@ create table points(
 	foreign key(profile_id)
 		references user_profile(username)
 );
-
-create table premi(
-	premio_id varchar(10) primary key,
-	prezzo integer,
-	azienda_id varchar(20),
-	premio text,
-	quantita integer,
-	foreign key(azienda_id)
-		references aziende(codice)
-);
+;
 
 create table premio_acquisito(
 	profile_id varchar(30),

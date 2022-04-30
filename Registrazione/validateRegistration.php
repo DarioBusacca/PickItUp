@@ -3,8 +3,8 @@ if (!(isset($_POST['reg-button']))) {
     header("Location: /");
 }
 else {
-    $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUpDB
-                user=postgres password=S.apienza2022") 
+    $dbconn = pg_connect("host=localhost port=5050 dbname=PickItUp
+                user=postgres password=sql") 
                 or die('Could not connect: ' . pg_last_error());
 }
 ?>
@@ -16,7 +16,7 @@ else {
        
             if ($dbconn) {
                 $email = $_POST['email'];
-                $q1="select * from users where email= $1";
+                $q1="select * from user_profile where email= $1";
                 $result=pg_query_params($dbconn, $q1, array($email));
                 if ($line=pg_fetch_array($result, null, PGSQL_ASSOC)) {
                     echo "<h1> Sorry, you are already a registered user</h1>
@@ -28,10 +28,10 @@ else {
                     $cognome = $_POST['cognome'];
                     $password = md5($_POST['password']);
                     
-                    $dataN = $_POST['birthday'];
+                    $birthday = $_POST['birthday'];
                     $username = $_POST['username'];
 
-                    $q2 = "insert into users(user_name,first_name,last_name,email,pswd) values ($1,$2,$3,$4,$5)";
+                    $q2 = "insert into user_profile(username, nome, cognome, email, password) values ($1,$2,$3,$4,$5)";
                     $data = pg_query_params($dbconn, $q2,
                         array($username, $nome, $cognome, $email, $password));
                     if ($data) {
