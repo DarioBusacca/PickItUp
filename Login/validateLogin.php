@@ -15,7 +15,7 @@ else {
         <?php
             if ($dbconn) {
                 $username = $_POST['username'];
-                $q1 = "select * from users where user_name= $1";
+                $q1 = "select * from users where username= $1";
                 $result = pg_query_params($dbconn, $q1, array($username));
                 if (!($line=pg_fetch_array($result, null, PGSQL_ASSOC))) {
                     echo "<h1>Sorry, you are not a registered user</h1>
@@ -25,7 +25,7 @@ else {
                 }
                 else {
                     $password = md5($_POST['password']);
-                    $q2 = "select * from users where user_name = $1 and pswd = $2";
+                    $q2 = "select * from users where username = $1 and password = $2";
                     $result = pg_query_params($dbconn, $q2, array($username,$password));
                     if (!($line=pg_fetch_array($result, null, PGSQL_ASSOC))) {
                         echo "$password <br>";
