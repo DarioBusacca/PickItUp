@@ -1,12 +1,8 @@
 <?php
-if (!(isset($_POST['upload-btn']))) {
-    header("Location: /");
-}
-else {
     $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
                 user=postgres password=postgres") 
                 or die('Could not connect: ' . pg_last_error());
-}
+
 ?>
 
 <!DOCTYPE html>
