@@ -47,13 +47,13 @@ else {
                         <input type="submit" value="UPLOAD PROFILE PICTURE" id="upload" >
                         <script type="text/javascript">
                         document. getElementById("upload"). onclick = function () {
-                        location. href = "profile_pic.html?username=$username";
+                        location. href = "profile_pic.html?username='.$username.'";
                         };
                         </script>
                         <input type="submit" value="SKIP" id="skip" >
                         <script type="text/javascript">
                         document. getElementById("skip"). onclick = function () {
-                        location. href = "../index.php?username=$username";
+                        location. href = "../index.php?username='.$username.'";
                         };
                         </script>
                         </div>';

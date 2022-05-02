@@ -12,16 +12,18 @@
 <body>
 	<div class="signup">
 		<font size="30px" >PickItUp</font>
- 		 <form action="" method="post" enctype="multipart/form-data" class="form-signin">
+ 		 <div class="form-signin">
   			Select image to upload:
  		 	<input type="file" name="fileToUpload" id="fileToUpload">
+			<input type="submit" value="UPLOAD IMAGE" name="upload-btn" id="upload-btn">
  		 	<script type="text/javascript">
- 		 		document. getElementById("logout-btn"). onclick = function () {
-				location. href = "upload_profilepic.php?username=$username";
+ 		 		document. getElementById("upload-btn").onclick = function () {
+				var url = window.location.href;
+				var username = url.searchParams.get('username');
+				location.href = "upload_profilepic.php?username=${username}";
 			};
  		 	</script>
-  			<input type="submit" value="UPLOAD IMAGE" name="upload-btn">
-		</form>
+		</div>
 	</div>
 </body>
 </html>

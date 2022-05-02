@@ -17,7 +17,7 @@
 	<?php 
 	if($dbconn){
 
-		
+		$username=$_GET['username'];
 		mkdir("../Media/$username");
 		$target_dir = "../Media/$username";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
