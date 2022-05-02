@@ -3,8 +3,8 @@ if (!(isset($_POST['reg-button']))) {
     header("Location: /");
 }
 else {
-    $dbconn = pg_connect("host=localhost port=5050 dbname=PickItUp
-                user=postgres password=sql") 
+    $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
+                user=postgres password=postgres") 
                 or die('Could not connect: ' . pg_last_error());
 }
 ?>
@@ -30,10 +30,11 @@ else {
                     
                     $birthday = $_POST['birthday'];
                     $username = $_POST['username'];
+                    $gender = $_POST['sesso'];
 
-                    $q2 = "insert into user_profile(username, nome, cognome, email, password) values ($1,$2,$3,$4,$5)";
+                    $q2 = "insert into user_profile(username, nome, cognome, email, password, gender, birthday) values ($1,$2,$3,$4,$5,$6,$7);";
                     $data = pg_query_params($dbconn, $q2,
-                        array($username, $nome, $cognome, $email, $password));
+                        array($username, $nome, $cognome, $email, $password, $gender, $birthday));
                     if ($data) {
                         echo "<h1> Registration is completed. 
                             Start using the website <br/></h1>";

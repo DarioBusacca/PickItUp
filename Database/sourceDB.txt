@@ -3,10 +3,10 @@ create table User_profile (
 	password varchar(20),
 	email varchar(50),
 	gender varchar(10),
+	nome varchar(30),
+	cognome varchar(30),
 	times timestamp,
 	birthday integer,
-	birthmonth integer,
-	birthyear integer,
 	picture text,
 	unique (email)
 );

@@ -118,7 +118,7 @@
             from points as p join User_profile as u on p.profile_id=u.username
             where profile_id=$1;
             ";
-            $result=pg_query($dbconn,$query,array($username));
+            $result=pg_query_params($dbconn,$query,array($username));
             $pos = 1;
             while($line=pg_fetch_array($result, null, PGSQL_ASSOC)){
             	if($pos == 10)
