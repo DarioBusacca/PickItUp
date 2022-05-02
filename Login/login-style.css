@@ -9,7 +9,7 @@
 
 	}
 	.form-login{
-		border-color: green;
+		border-color: rgb(0, 250, 120);
 		border-style: solid;
 		width: 300px;
 		height: auto;
@@ -47,7 +47,7 @@
 
 	}
 	input:hover {
-		border-color: green;
+		border-color: rgb(0, 250, 120);
 
 	}
 	input:active {
@@ -57,7 +57,7 @@
 		margin-bottom: 10px;
 		margin-top: 10px;
 		border-radius: 10px;
-		background-color: green;
+		background-color: rgb(0, 250, 120);
 		color: white;
 		border: none;
 		padding-top: 10px;
@@ -73,8 +73,8 @@
 	}
 	input[type="submit"]:hover {
 		background-color: white;
-		border-color: green;
-		color: green;
+		border-color: rgb(0, 250, 120);
+		color: rgb(0, 250, 120);
 	}
 	::placeholder {
 		font-family: Square Peg;
