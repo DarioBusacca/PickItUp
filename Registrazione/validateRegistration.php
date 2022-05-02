@@ -41,7 +41,7 @@ else {
                     $data = pg_query_params($dbconn, $q2,
                         array($username, $nome, $cognome, $email, $password, $gender, $birthday));
                     if ($data) {
-                        echo "<h1>Registration completed<br/></h1>"
+                        echo "<h1>Registration completed<br/></h1>";
                         echo '<div class="signup">
                         <font size="30px" >PickItUp</font>
                         <input type="submit" value="UPLOAD PROFILE PICTURE" id="upload" >
@@ -56,7 +56,7 @@ else {
                         location. href = "../index.php?username=$username";
                         };
                         </script>
-                        </div>'
+                        </div>';
                     }
                 }
             }
