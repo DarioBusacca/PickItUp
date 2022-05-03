@@ -1,103 +1,47 @@
+<?php
 
+    $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
+                user=postgres password=postgres") 
+                or die('Could not connect: ' . pg_last_error());
+    $username = $_GET['username'];            
+    $query = "select picture from user_profile where username = $1";
+    $result = pg_query_params($dbconn,$query,array($username));
+    $line=pg_fetch_array($result,null,PGSQL_ASSOC);
+    $pic= $line['picture'];
+    $userpic_src=substr($pic, 3);
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>PickItUp | HomePage</title>
-	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="style.css"/>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
-    <script src="../js/bootstrap.min.js"></script>
-
 </head>
-<style type="text/css">
-	.banner{
-		background-color:#35682d;
-		width: 100%;
-		height: 75px;
-		display: flex;
-		flex-direction: row;
-		font-family:Square peg;
-		font-size: 25px;
-		color: white;
-		font-weight: bolder;
-		
-	}
-	.logo {
-		padding-left: 16px;
-		padding-right: 50px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin-right: 20px;
-		border-color: black;
-	}
-	.searchbar {
-		margin-right: 230px;
-		border-style: solid;
-		border: none;
-		margin-top: 10px;
 
-
-
-
-	}
-	.nav-link {
-		margin-right: 20px;
-		width: auto;
-		height: auto;
-		color: white;
-		background-color: #35682d;
-		transition: background-color 0.3s ,color 1s;
-	}
-	.nav-link:hover {
-		background-color: white;
-		color: #35682d;
-		border-radius:  4px;
-	}
-	.nav-button {
-		width: auto;
-		height: auto;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		padding-left: 16px;
-		padding-right: 15px;
-		color:white;
-		background-color: green;
-		border-radius: 20px;
-		margin-right: 10px;
-		margin-left: 30px;
-		margin-top: auto;
-		margin-bottom: auto;
-		border-color: green;
-		transition: opacity 0.6s, background-color 0.6s,color 0.6s;
-	}
-	.nav-button:hover {
-		background-color: white;
-		color: green;
-	}
-	.nav-button:active {
-		opacity: 0.7;
-		background-color: white;
-		color: green;
-	}
-</style>
 <body>
+<!--BANNER-->
 	<div class="banner">
 		<span class="logo">PICKITUP</span>
-		<form class="searchbar" name="searchbar" method="POST" action="">
+		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" name="search" placeholder="Search">
+			<input type="submit" class="search-btn" value="SEARCH">
 		</form>
 		<a  class = "nav-link" href="Sfide/index.php">CHALLENGES</a>
 		<a  class = "nav-link" href="Mappa/index.php">MAP</a>
 		<a  class = "nav-link" href="Sponsor/index.php">SPONSORS</a>
-		<img  id = "profile_picture" >
+		<img  id = "profile_picture" src=<?php echo $userpic_src; ?>>
 		<button id="settings-btn" class="nav-button">SETTINGS</button>
 		<script type="text/javascript">
 			document.getElementById("settings-btn"). onclick = function () {
-				location.href = "Settings/index.php";
+				var url_string = window.location.href;
+				var url = new URL(url_string);
+				var username = url.searchParams.get("username"); 
+				location.href = "Settings/index.php?username="+username;
 			};
 		</script>
 		<button id="logout-btn" class="nav-button" >LOG OUT</button>
@@ -106,53 +50,83 @@
 			location. href = "Login/login.html";
 			};
 			</script>
+	</div>
+	<!--FINE BANNER-->
+
+
+	<div class = "site-action" style="display:flex;">
+	<!--LEADERBOARD-->
 			<?php
-        
-            echo ('<div  class="leaderboard">' );
-            $query="select profile_id,picture,nPunti
+        	
+            echo ('<div  class="leaderboard" >' );
+            echo ('<div class="titolo-sezione">LEADERBOARD |&nbsp|&nbsp|&nbsp|&nbspPOINTS</div><br>');
+            $query="
+            (select p.profile_id,u.picture,p.nPunti as punti
             from points as p join User_profile as u on p.profile_id=u.username
-            order by nPunti desc
-            limit 9
-            union 
-            select profile_id,picture,nPunti
-            from points as p join User_profile as u on p.profile_id=u.username
-            where profile_id=$1;
+            
+			limit 9)
+ 			UNION
+			( select p1.profile_id,u1.picture,p1.nPunti as punti
+            from points as p1 join User_profile as u1 on p1.profile_id=u1.username
+            where p1.profile_id=$1)
+			order by punti desc;
             ";
             $result=pg_query_params($dbconn,$query,array($username));
             $pos = 1;
             while($line=pg_fetch_array($result, null, PGSQL_ASSOC)){
             	if($pos == 10)
             		break;
-
-
-
-
+            	$profile_id=$line['profile_id'];
+            	$points = $line['punti'];
+            	$pic= $line['picture'];
+            	$pic_src=substr($pic, 3);
+            	echo '<div class="leaderboard-element">';
+            	echo '<div  class= "position">'. $pos. '°</div>';
+            	echo '<div  class= "user">'. $profile_id . '</div>';
+            	echo '<img   src ="'.$pic_src . '" id="profile_picture">';
+            	echo '<div class = "points">' . $points .'</div>';
+          		echo ' </div><br>';
             	$pos += 1;
             }
             
-            
-
-           
-           
             if($pos == 10){
-            	$user_points=$line['nPunti'];
+            	$points=$line['nPunti'];
             	$query_pos="select count(*) as pos
             	from points 
             	where profile_id != $1 and nPunti > $2";
-            	$result_pos = pg_query_params($dbconn,$query_pos,array($username,$user_points));
+            	$result_pos = pg_query_params($dbconn,$query_pos,array($username,$points));
             	$line=pg_fetch_array($result_pos,null,PGSQL_ASSOC);
             	$user_pos=$line['pos'];
+            	echo '<div style="display:flex; class="leaderboard-element">';
+            	echo '<div flex = "1" class= "position">'. $user_pos. '</div>';
+            	echo '<div flex = "1" class= "user">'. $username . '</div>';
+            	echo '<img  flex = "2" src ="'.$userpic_src . '" id="profile_picture">';
+            	echo '<div flex="0.5" >' . $points .'</div>';
+            	echo '</div>';
+            	
             }
-            
+            echo '</div>';
 
+    //FINE LEADERBOARD
+
+
+    //TIMELINE
+            echo '<div class="timeline" >';
+             echo ('<div class="titolo-sezione">TIMELINE</div><br>');
+             $q1="";
+             $q2="";
+            echo '</div>';
+    //FINE TIMELINE
+
+
+
+    //PREMI E OFFERTE
+            echo '<div class="awards">';
+            echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
+
+            echo '</div>';
+    //FINE PREMI E OFFERTE
         ?> 
-		
-
-
-		
-
-
 	</div>
-
 </body>
 </html>

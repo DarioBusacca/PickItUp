@@ -1,0 +1,164 @@
+.banner{
+		background-color:#35682d;
+		width: 100%;
+		height: 75px;
+		display: flex;
+		flex-direction: row;
+		font-family:Square peg;
+		font-size: 25px;
+		color: white;
+		font-weight: bolder;
+		
+	}
+	.logo {
+		padding-left: 16px;
+		padding-right: 50px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin-right: 20px;
+		border-color: black;
+	}
+	.searchbar {
+		margin-right: 180px;
+		border-style: solid;
+		border: none;
+		margin-top: 10px;
+		width: auto;
+	}
+	.nav-link {
+		margin-right: 20px;
+		width: auto;
+		height: auto;
+		color: white;
+		padding-right: 20px;
+		padding-left: 20px;
+		background-color: #35682d;
+		transition: background-color 0.3s ,color 1s;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.nav-link:hover {
+		background-color: white;
+		color: #35682d;
+		border-radius:  4px;
+
+	}
+	.nav-button {
+		width: auto;
+		height: auto;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 16px;
+		padding-right: 15px;
+		color:white;
+		background-color: green;
+		border-radius: 20px;
+		margin-right: 10px;
+		margin-left: 30px;
+		margin-top: auto;
+		margin-bottom: auto;
+		border-color: green;
+		transition: opacity 0.6s, background-color 0.6s,color 0.6s;
+	}
+	.nav-button:hover {
+		background-color: white;
+		color: green;
+	}
+	.nav-button:active {
+		opacity: 0.7;
+		background-color: white;
+		color: green;
+	}
+	.site-action {
+		width: 100%;
+		height: 700px;
+		display: flex;
+		border-color: green;
+		border-style: solid;
+		font-family:Square peg;
+		font-size: 25px;
+		color: black;
+		margin-top: 6px;
+
+	}
+	.leaderboard {
+		border-style: solid;
+		border-color: black;
+  		text-align: center;
+		display: flex;
+		flex-direction: column;
+		margin-right: 30px;
+
+	}
+	.timeline {
+		overflow:hidden;
+		flex-grow: 8;
+		border-style: solid;
+		border-color: darkgrey;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-right: 30px;
+	}
+	#profile_picture {
+		border-radius: 50%;
+		border-style: solid;
+		border-color: white;
+		width: 60px;
+		height: 60px;
+		
+	}
+	.awards {
+		flex-grow: 2;
+		border-style: solid;
+		border-color: lightgrey;
+	}
+	.leaderboard-element {
+		width: 250px;
+		margin-bottom: 4px;
+		height: 80px;
+		border-color: green;
+		border-style: solid;
+		display: flex;
+		flex-direction: row;
+
+	}
+	.position {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		background-color: green;
+		color: white;
+		width: 20px;
+
+	}
+	.user {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		flex-grow: 2;
+		background-color: ;
+		font-size: 25px;
+		font-weight: bolder;
+	}
+	.points{
+		padding-top: 10px;
+		padding-bottom: 10px;
+		flex-grow: 1;
+		background-color: lightgrey;
+		color: black;
+	}
+	.titolo-sezione {
+		background-color: #35682d;
+		color :white;
+		font-size: 30px;
+		text-align: center;
+		width: auto;
+	}
+	.search-btn {
+		padding-bottom: 10px;
+		padding-top: 10px;
+		padding-right: 7px;
+		padding-left: 7px;
+		background-color: green;
+		color: white;
+		border:  none;
+	}

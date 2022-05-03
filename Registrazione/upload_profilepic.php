@@ -1,7 +1,12 @@
 <?php
+    if (!(isset($_POST['upload-btn']))) {
+    header("Location: /");
+	}
+	else {
     $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
                 user=postgres password=postgres") 
                 or die('Could not connect: ' . pg_last_error());
+	}
 
 ?>
 
@@ -18,8 +23,8 @@
 	if($dbconn){
 
 		$username=$_GET['username'];
-		mkdir("../Media/$username");
-		$target_dir = "../Media/$username";
+		mkdir("../Media/$username/");
+		$target_dir = "../Media/$username/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -67,12 +72,13 @@
   			}
 		}
 
-
-		$q1="update user_profile set picture=$1 where username=$2";
-		$data= pg_query_params($dbconn,$q1,array($target_file,$username));
-		if($data){
-			echo '<br><a href="../index.php?username=$username" >Click here</a>
-			to PickItUp homepage';
+		if($uploadOk){
+			$q1="update user_profile set picture=$1 where username=$2";
+			$data= pg_query_params($dbconn,$q1,array($target_file,$username));
+			if($data){
+				echo '<br><a href="../index.php?username='. $username .'" >Click here</a>
+				to PickItUp homepage';
+			}
 		}
 	}
 ?>
