@@ -8,6 +8,7 @@ create table User_profile (
 	times timestamp,
 	birthday integer,
 	picture text,
+	points integer default 0,
 	unique (email)
 );
 
@@ -39,6 +40,7 @@ create table challenges(
 	nPartecipanti integer,
 	foreign key(creator)
 		references user_profile(username)
+	points integer default 10
 );
 
 create table partecipa(
@@ -55,13 +57,6 @@ create table aziende(
 	codice varchar(20) primary key,
 	nome varchar(20),
 	sito text
-);
-
-create table points(
-	profile_id varchar(20) primary key,
-	nPunti integer,
-	foreign key(profile_id)
-		references user_profile(username)
 );
 
 create table premi(
