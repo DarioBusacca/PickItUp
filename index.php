@@ -1,7 +1,7 @@
 <?php
 
     $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
-                user=postgres password=postgres") 
+                user=postgres password=S.apienza2022") 
                 or die('Could not connect: ' . pg_last_error());
     $username = $_GET['username'];            
     $query = "select picture from user_profile where username = $1";
@@ -32,7 +32,7 @@
 			<input type="submit" class="search-btn" value="SEARCH">
 		</form>
 		<a  class = "nav-link" href="Sfide/index.php">CHALLENGES</a>
-		<a  class = "nav-link" href="Mappa/index.php">MAP</a>
+		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
 		<a  class = "nav-link" href="Sponsor/index.php">SPONSORS</a>
 		<img  id = "profile_picture" src=<?php echo $userpic_src; ?>>
 		<button id="settings-btn" class="nav-button">SETTINGS</button>
@@ -113,8 +113,8 @@
     //TIMELINE
             echo '<div class="timeline" >';
              echo ('<div class="titolo-sezione">TIMELINE</div><br>');
-             $q1="";
-             $q2="";
+             $q1="select * from posts";
+             $q2="select * from aziende";
             echo '</div>';
     //FINE TIMELINE
 
@@ -123,6 +123,8 @@
     //PREMI E OFFERTE
             echo '<div class="awards">';
             echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
+            $query = "select * from awards";
+
 
             echo '</div>';
     //FINE PREMI E OFFERTE

@@ -4,7 +4,7 @@ if (!(isset($_POST['login-button']))) {
 }
 else {
     $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
-                user=postgres password=postgres") 
+                user=postgres password=S.apienza2022") 
                 or die('Could not connect: ' . pg_last_error());
 }
 ?>
