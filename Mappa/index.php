@@ -1,7 +1,7 @@
 <?php
   //overflow:scroll;
     $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
-                user=postgres password=S.apienza2022") 
+                user=postgres password=postgres") 
                 or die('Could not connect: ' . pg_last_error());
     $username = $_GET['username'];            
     $query = "select picture from user_profile where username = $1";
@@ -161,7 +161,7 @@
     <div id="map"></div>
 
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCplC2ePOmxiywnXvngIy6S2w3yALf93OE&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 </body>
 </html>
