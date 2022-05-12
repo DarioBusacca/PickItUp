@@ -125,7 +125,7 @@
 			$result2 = pg_query($dbconn, $q2);
 			$rand = rand(0, 100);
 			$i = 0;
-			while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
+			while($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
 				if($i == $rand){
 					$line = pg_fetch_array($result2, null, PGSQL_ASSOC);
 					if($line){
