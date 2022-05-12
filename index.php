@@ -185,7 +185,7 @@
 					echo '<script type = "text/javascript">
 							document.getElementsByClass("scroll_image <' . $post_id . '").onclick=functio(){
 
-							}
+							};
 						</script>';
 					echo '</div>';
 					echo '</div>';
