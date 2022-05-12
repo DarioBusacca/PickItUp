@@ -161,7 +161,7 @@
     <div id="map"></div>
 
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCplC2ePOmxiywnXvngIy6S2w3yALf93OE&callback=initMap">
     </script>
 </body>
 </html>

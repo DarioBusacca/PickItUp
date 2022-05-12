@@ -56,27 +56,28 @@
 
 	<div class = "site-action" style="display:flex;">
 	<!--LEADERBOARD-->
-			<?php
+		<?php
         	
             echo ('<div  class="leaderboard" >' );
             echo ('<div class="titolo-sezione">LEADERBOARD |&nbsp|&nbsp|&nbsp|&nbspPOINTS</div><br>');
             $query="
-            (select p.profile_id,u.picture,p.nPunti as punti
-            from points as p join User_profile as u on p.profile_id=u.username
-            
+            (select username, picture, points as punti
+			from user_profile as u           
 			limit 9)
+
  			UNION
-			( select p1.profile_id,u1.picture,p1.nPunti as punti
-            from points as p1 join User_profile as u1 on p1.profile_id=u1.username
-            where p1.profile_id=$1)
-			order by punti desc;
-            ";
+
+			(select username, picture, points as punti
+            from user_profile as u1
+            where u1.username=$1)
+			order by points desc;";
+			
             $result=pg_query_params($dbconn,$query,array($username));
             $pos = 1;
             while($line=pg_fetch_array($result, null, PGSQL_ASSOC)){
             	if($pos == 10)
             		break;
-            	$profile_id=$line['profile_id'];
+            	$profile_id=$line['username'];
             	$points = $line['punti'];
             	$pic= $line['picture'];
             	$pic_src=substr($pic, 3);
@@ -90,10 +91,10 @@
             }
             
             if($pos == 10){
-            	$points=$line['nPunti'];
+            	$points=$line['punti'];
             	$query_pos="select count(*) as pos
-            	from points 
-            	where profile_id != $1 and nPunti > $2";
+            	from user_profile 
+            	where username != $1 and points > $2";
             	$result_pos = pg_query_params($dbconn,$query_pos,array($username,$points));
             	$line=pg_fetch_array($result_pos,null,PGSQL_ASSOC);
             	$user_pos=$line['pos'];
@@ -113,9 +114,86 @@
     //TIMELINE
             echo '<div class="timeline" >';
              echo ('<div class="titolo-sezione">TIMELINE</div><br>');
-             $q1="select * from posts";
-             $q2="select * from aziende";
-            echo '</div>';
+			 $q1 = "select post_id, profile_id, written_text, media_location
+			 		from post
+					order by times";
+             $q2 = "select challenge_id, luogo, npartecipanti
+			 		from challenges
+					order by times";
+			
+					$result1 = pg_query($dbconn, $q1);
+			$result2 = pg_query($dbconn, $q2);
+			$rand = rand(0, 100);
+			$i = 0;
+			while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
+				if($i == $rand){
+					$line = pg_fetch_array($result2, null, PGSQL_ASSOC);
+					if($line){
+						$id = $line['challenge_id'];
+						$info = $line['luogo'];
+						$nPart = $line['npartecipanti'];
+						echo '<div class = "post">';
+						echo '<form method = "GET" action = "Challenge/partecipa_challenge.php?username=' . $username . '$id=' . $id . '">';
+						echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
+						echo '</form>';
+						echo '</div>';
+						$i -= $rand;
+					}
+				} else {
+					$profile = $line['profile_id'];
+					$text = $line['written_text'];
+					$media = $line['media_location'];
+					$post_id = $line['post_id'];
+
+					echo '<div class = "post">';
+					$arr = explode("/", $media);
+					$profile_src = $arr[0].'/'.$arr[1];
+					$profile_src = scandir($profile_src);
+					for($i = 0; $i < count($profile_src); $i++){
+						if(!is_numeric($profile_src)){
+							$profile_pic_src = $profile_src[$i];
+						}
+					}
+					
+					$profile_pic_src = $arr[0].'/'.arr[1].'/'.$profile_pic_src;
+					$media_array = scandir($media);
+					$src = $media.'/'.$media_array[2];
+					echo '<div class = "post_banner">';
+					echo '<font size = "45>' . $profile . '&nbsp;&nbsp;</font>';
+					echo '<img src = "' . $profile_pic_src . '" id = "profile_picture">';
+					echo '</div>';
+					
+					echo '<div class = "post_text">';
+					echo "<br>$text";
+					echo '</div>';
+
+					echo '<div class = "post_media"' . $post_id . '">';
+					echo '<img src ="' . $src . 'class = "post_img">';
+					echo '<div class = "scroll_image >' . $post_id . '" > > </div>';
+
+					echo '<script type="text/javascript">
+							document.getElementsByClass("scroll_image > '.$post_id.'"). onclick = function () {
+							const media_array=<?php echo json_encode($media_array); ?>;
+							const div=document.getElementsByClass("post_media '.$post_id .'");
+							for(let i=0;i < media_array.length;i++){
+								if(div.query_selector(".post_image").src == media_array[i]){
+									div.innerHTML = "<div class ="scroll_image < '.$post_id.'" > < </div>";
+								}
+							}
+						};
+						</script>';
+					echo '<script type = "text/javascript">
+							document.getElementsByClass("scroll_image <' . $post_id . '").onclick=functio(){
+
+							}
+						</script>';
+					echo '</div>';
+					echo '</div>';
+					$rand = rand(0, 100);
+					$i += 1;
+				}
+			}
+			echo '</div>';
     //FINE TIMELINE
 
 

@@ -23,7 +23,7 @@ create table Friendship(
 );
 
 create table post (
-	post_id varchar(20) primary key,
+	post_id SERIAL primary key,
 	profile_id varchar(30),
 	written_text text,
 	media_location text,
@@ -33,7 +33,7 @@ create table post (
 );
 
 create table challenges(
-	challenge_id varchar(20) primary key,
+	challenge_id SERIAL primary key,
 	creator varchar(30),
 	times timestamp,
 	luogo text,
@@ -45,7 +45,7 @@ create table challenges(
 
 create table partecipa(
 	profile_id varchar(30),
-	challenge_id varchar(20),
+	challenge_id SERIAL,
 	foreign key(profile_id)
 		references user_profile(username),
 	foreign key(challenge_id)
