@@ -70,7 +70,7 @@
 			(select username, picture, points as punti
             from user_profile as u1
             where u1.username=$1)
-			order by points desc;";
+			order by punti desc;";
 			
             $result=pg_query_params($dbconn,$query,array($username));
             $pos = 1;
