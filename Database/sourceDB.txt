@@ -78,3 +78,6 @@ create table premio_acquisito(
 		references premi(premio_id),
 	primary key(profile_id, premio)
 );
+
+
+insert into aziende values ('1', 'ennel', 'example.com'), ('2', 'azienda', 'example.com');
