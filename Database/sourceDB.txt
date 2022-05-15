@@ -56,6 +56,7 @@ create table partecipa(
 create table aziende(
 	codice varchar(20) primary key,
 	nome varchar(20),
+	logo text,
 	sito text
 );
 
@@ -80,4 +81,4 @@ create table premio_acquisito(
 );
 
 
-insert into aziende values ('1', 'ennel', 'example.com'), ('2', 'azienda', 'example.com');
+insert into aziende values ('1', 'ennel', 'example.com', '../Media/Loghi/1.jpeg'), ('2', 'azienda', 'example.com', '../Media/Loghi/2.jpeg');

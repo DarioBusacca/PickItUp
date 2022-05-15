@@ -31,9 +31,9 @@
 			<input type="text" name="search" placeholder="Search">
 			<input type="submit" class="search-btn" value="SEARCH">
 		</form>
-		<a  class = "nav-link" href="Sfide/index.php">CHALLENGES</a>
+		<a  class = "nav-link" href="Sfide/index.php?username=<?php echo $username?>">CHALLENGES</a>
 		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
-		<a  class = "nav-link" href="Sponsor/index.php">SPONSORS</a>
+		<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>">SPONSORS</a>
 		<img  id = "profile_picture" src=<?php echo $userpic_src; ?>>
 		<button id="settings-btn" class="nav-button">SETTINGS</button>
 		<script type="text/javascript">
