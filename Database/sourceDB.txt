@@ -1,11 +1,11 @@
 create table User_profile (
 	username varchar(30) primary key,
-	password varchar(20),
+	password varchar(50),
 	email varchar(50),
 	gender varchar(10),
 	nome varchar(30),
 	cognome varchar(30),
-	times timestamp,
+	times timestamp default current_timestamp,
 	birthday integer,
 	picture text,
 	points integer default 0,
@@ -21,21 +21,53 @@ create table Friendship(
 		references user_profile(username),
 	primary key (profile_accept, profile_request)
 );
+CREATE TABLE messages (
+  message_id  SERIAL PRIMARY KEY,
+  username varchar(30) not null,
+  room_id int NOT NULL,
+  msg text not null,
+  times timestamp  default current_timestamp,
+  foreign key (username) references 
+  user_profile(username),
+	foreign key (room_id) references 
+	challenge_room(room_id)
+
 
 create table post (
 	post_id SERIAL primary key,
 	profile_id varchar(30),
 	written_text text,
 	media_location text,
-	times timestamp,
+	times timestamp default current_timestamp,
 	foreign key(profile_id)
 		references user_profile(username)
 );
+CREATE TABLE room_member (
+  id serial  primary key,
+  username varchar(30) NOT NULL,
+  room_id int NOT NULL,
+  times timestamp default current_timestamp,
+  foreign key (username) references
+  user_profile(username),
+  foreign key (room_id) references
+ challenge_room(room_id)
+);
 
+create table challenge_room (
+	room_id SERIAL primary key,
+	challenge_id int,
+	description text,
+	foreign key(challenge_id)
+		references challenges(challenge_id),
+	times timestamp default current_timestamp,
+	creator varchar(30),
+	foreign key(creator) 
+		references user_profile(username)
+);
 create table challenges(
 	challenge_id SERIAL primary key,
 	creator varchar(30),
-	times timestamp,
+	times timestamp default current_timestamp,
 	luogo text,
 	nPartecipanti integer,
 	foreign key(creator)
@@ -61,7 +93,7 @@ create table aziende(
 );
 
 create table premi(
-	premio_id varchar(10) primary key,
+	premio_id SERIAL primary key,
 	prezzo integer,
 	azienda_id varchar(20),
 	premio text,
@@ -79,6 +111,8 @@ create table premio_acquisito(
 		references premi(premio_id),
 	primary key(profile_id, premio)
 );
+
+/*I cosi s' fanu giusti na vota e basta!
 
 
 insert into aziende values ('1', 'ennel', 'example.com', '../Media/Loghi/1.jpeg'), ('2', 'azienda', 'example.com', '../Media/Loghi/2.jpeg');
