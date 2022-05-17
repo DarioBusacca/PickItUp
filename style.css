@@ -1,14 +1,10 @@
 .banner{
 		background-color:#35682d;
-		width: 100%;
-		height: 75px;
+		padding: 10px 0 10px 0;
 		display: flex;
-		flex-direction: row;
-		font-family:Square peg;
 		font-size: 25px;
-		color: white;
+		list-style: none;
 		font-weight: bolder;
-		
 	}
 	.logo {
 		padding-left: 16px;
@@ -33,6 +29,8 @@
 		padding-right: 20px;
 		padding-left: 20px;
 		background-color: #35682d;
+		font-family:Square peg;
+		color: white;
 		transition: background-color 0.3s ,color 1s;
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -74,7 +72,7 @@
 		height: 700px;
 		display: flex;
 		border-color: green;
-		border-style: solid;
+		border-style: hidden;
 		font-family:Square peg;
 		font-size: 25px;
 		color: black;
@@ -82,7 +80,7 @@
 
 	}
 	.leaderboard {
-		border-style: solid;
+		border-style: hidden;
 		border-color: black;
   		text-align: center;
 		display: flex;
@@ -118,13 +116,13 @@
 		margin-bottom: 4px;
 		height: 80px;
 		border-color: green;
-		border-style: solid;
+		border-style: outset;
 		display: flex;
 		flex-direction: row;
 
 	}
 	.position {
-		padding-top: 10px;
+		padding-top: 20px;
 		padding-bottom: 10px;
 		background-color: green;
 		color: white;
@@ -132,17 +130,17 @@
 
 	}
 	.user {
-		padding-top: 10px;
+		padding-top: 20px;
 		padding-bottom: 10px;
 		flex-grow: 2;
-		background-color: ;
+		background-color: white;
 		font-size: 25px;
 		font-weight: bolder;
 	}
 	.points{
-		padding-top: 10px;
-		padding-bottom: 10px;
-		flex-grow: 1;
+		padding-top: 20px;
+		text-align: margin-right;
+		width: 50px;
 		background-color: lightgrey;
 		color: black;
 	}
@@ -158,9 +156,9 @@
 		padding-top: 10px;
 		padding-right: 7px;
 		padding-left: 7px;
-		background-color: green;
+		background-color: #35682d;
 		color: white;
-		border:  none;
+		border:  hidden;
 	}
 
 	/****************************
