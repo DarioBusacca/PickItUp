@@ -15,5 +15,63 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: square peg;
+  }
+.create_challenge{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+}
+.form-create_challenge{
+    border-color: green;
+    border-style: solid;
+    width: 510px;
+    height: auto;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  input[type="text"] {
+    margin-top: 3px;
+      margin-bottom: 3px;
+      padding-top: 3px;
+      padding-right: 3px;
+      padding-left: 3px;
+      padding-bottom: 3px;
+      text-align: center;
+      width: 500px;
+      height: 250px;
+      transition: all 300;
+      font-family: Roboto;
+      font-size: 25px;
+  }
+  input[type="submit"]{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
     background-color: green;
+    color: white;
+    border: none;
+    padding-top: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.15s;
+    vertical-align: top;
+  }
+  input[type="submit"]:hover {
+    background-color: white;
+    border-color: green;
+    color: green;
+  }
+  ::placeholder {
+    font-family: Square Peg;
+    font-size: 25px;
+    font-weight: bold;
   }

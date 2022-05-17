@@ -119,23 +119,16 @@
 </style>
   <body>
     <div class="banner">
-    <div class="logo" id="logo">PICKITUP</div>
-    <script type="text/javascript">
-      document.getElementById("logo"). onclick = function () {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var username = url.searchParams.get("username"); 
-        location.href = "../index.php?username="+username;
-      };
-    </script>
+    <span class="logo">PICKITUP</span>
     <form class="searchbar" name="searchbar" method="POST" action="search.php">
-      <input type="text" name="search" placeholder="Search">
-      <input type="submit" class="search-btn" value="SEARCH">
+      <input type="search" name="search" placeholder="Search">
+      <i class="uil uil-search" style="margin-right: 200px;"></i>
+      
     </form>
-    <a  class = "nav-link" href="../Sfide/index.php?username=<?php echo $username ?>">CHALLENGES</a>
-    <a  class = "nav-link" href="index.php?username=<?php echo $username ?>">MAP</a>
-    <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username ?>">SPONSORS</a>
-    <img  id = "profile_picture" src=<?php echo $pic; ?>>
+    <a  class = "nav-link" href="../Challenge/index.php">CHALLENGES</a>
+    <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username?>">MAP</a>
+    <a  class = "nav-link" href="../Sponsor/index.php" id="last-link">SPONSORS</a>
+    <img  class = "profile_picture" src=<?php echo $pic; ?>>
     <button id="settings-btn" class="nav-button">SETTINGS</button>
     <script type="text/javascript">
       document.getElementById("settings-btn"). onclick = function () {
@@ -151,7 +144,7 @@
       location. href = "../Login/login.html";
       };
       </script>
-    </div>
+  </div>
 
 
     <div class="titolo-sezione">Select the area to PickItUp!</div>

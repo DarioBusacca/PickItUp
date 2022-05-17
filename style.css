@@ -100,13 +100,12 @@
 		align-items: center;
 		margin-right: 30px;
 	}
-	#profile_picture {
+	.profile_picture {
 		border-radius: 50%;
 		border-style: solid;
 		border-color: white;
 		width: 60px;
-		height: 60px;
-		
+		aspect-ratio: 1/1;
 	}
 	.awards {
 		flex-grow: 2;
