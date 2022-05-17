@@ -13,6 +13,8 @@
 		padding-bottom: 10px;
 		margin-right: 20px;
 		border-color: black;
+		font-family:Square peg;
+		color: white;
 	}
 	.searchbar {
 		margin-right: 180px;
@@ -91,7 +93,7 @@
 	.timeline {
 		overflow:hidden;
 		flex-grow: 8;
-		border-style: solid;
+		border-style: hidden;
 		border-color: darkgrey;
 		display: flex;
 		flex-direction: column;
@@ -108,7 +110,7 @@
 	}
 	.awards {
 		flex-grow: 2;
-		border-style: solid;
+		border-style: hidden hidden hidden solid;
 		border-color: lightgrey;
 	}
 	.leaderboard-element {
@@ -116,7 +118,7 @@
 		margin-bottom: 4px;
 		height: 80px;
 		border-color: green;
-		border-style: outset;
+		border-style: none outset outset none;
 		display: flex;
 		flex-direction: row;
 

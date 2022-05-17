@@ -59,7 +59,7 @@
 		<?php
         	
             echo ('<div  class="leaderboard" >' );
-            echo ('<div class="titolo-sezione">LEADERBOARD |&nbsp|&nbsp|&nbsp|&nbspPOINTS</div><br>');
+            echo ('<div class="titolo-sezione">LEADERBOARD</div><br>');
             $query="
             (select username, picture, points as punti
 			from user_profile as u           
