@@ -13,16 +13,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>PickItUp | HomePage</title>
 
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,18 +28,16 @@
 
 <body>
 <!--BANNER-->
-	
 	<div class="banner">
 		<span class="logo">PICKITUP</span>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
-			<input type="search" name="search" placeholder="Search">
-			<i id="search_icon" class="uil uil-search" style="margin-right: 200px;"></i>
-			
+			<input type="text" name="search" placeholder="Search">
+			<input type="submit" class="search-btn" value="SEARCH">
 		</form>
 		<a  class = "nav-link" href="Challenge/index.php?username=<?php echo $username?>">CHALLENGES</a>
 		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
-		<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>" id="last-link">SPONSORS</a>
-		<img  class = "profile_picture" src=<?php echo $userpic_src; ?>>
+		<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>">SPONSORS</a>
+		<img  id = "profile_picture" src=<?php echo $userpic_src; ?>>
 		<button id="settings-btn" class="nav-button">SETTINGS</button>
 		<script type="text/javascript">
 			document.getElementById("settings-btn"). onclick = function () {
@@ -61,21 +56,18 @@
 	</div>
 	<!--FINE BANNER-->
 
-
-	<main>
-		<div class="container">
+	
+	<div class = "site-action" style="display:flex;">
 	<!--LEADERBOARD-->
 		<?php
         	
             echo ('<div  class="leaderboard" >' );
-            echo ('<div class="titolo-sezione">LEADERBOARD |&nbsp|&nbsp|&nbsp|&nbspPOINTS</div><br>');
+            echo ('<div class="titolo-sezione">LEADERBOARD</div><br>');
             $query="
             (select username, picture, points as punti
 			from user_profile as u           
 			limit 9)
-
  			UNION
-
 			(select username, picture, points as punti
             from user_profile as u1
             where u1.username=$1)
@@ -93,7 +85,7 @@
             	echo '<div class="leaderboard-element">';
             	echo '<div  class= "position">'. $pos. '°</div>';
             	echo '<div  class= "user">'. $profile_id . '</div>';
-            	echo '<img   src ="'.$pic_src . '" class="profile_picture">';
+            	echo '<img   src ="'.$pic_src . '" id="profile_picture">';
             	echo '<div class = "points">' . $points .'</div>';
           		echo ' </div><br>';
             	$pos += 1;
@@ -121,16 +113,16 @@
 
 
     //TIMELINE
-            echo '<div class="timeline" >';
+        echo '<div class="timeline" >';
              
-			 $q1 = "select post_id, profile_id, written_text, media_location
-			 		from post
-					order by times";
+			 $q1 = "select post_id, profile_id, written_text, picture, media_location
+			 		from post join user_profile on profile_id = username
+					order by post.times";
              $q2 = "select challenge_id, luogo, npartecipanti
 			 		from challenges
 					order by times";
 			
-					$result1 = pg_query($dbconn, $q1);
+			$result1 = pg_query($dbconn, $q1);
 			$result2 = pg_query($dbconn, $q2);
 			$rand = rand(0, 10);
 			$i = 0;
@@ -154,6 +146,7 @@
 							continue;
 				} else {
 					$profile = $line['profile_id'];
+					$profile_pic = $line['picture'];
 					$text = $line['written_text'];
 					$media = $line['media_location'];
 					$post_id = $line['post_id'];
@@ -167,15 +160,16 @@
 							$profile_pic_src = $profile_src[$j];
 						}
 					}
-					
+					$prof_pic = substr($profile_pic, 3);
 					$profile_pic_src = $arr[0].'/'.$arr[1].'/'.$profile_pic_src;
 					$media=$media . $post_id;
 					$media_array = scandir($media);
 					
 					echo '<div class = "post_banner">';
-					echo '<font size = "45">' . $profile . '&nbsp;&nbsp;</font>';
-					echo '<img src = "' . $profile_pic_src . '" class = "profile_picture">';
+					echo '<img src = "'.$prof_pic.'" id = "post-profile_picture">';
+					echo '<div class="post_banner-username">'.$profile.'</div>';
 					echo '</div>';
+					echo '<img src = "' . $profile_pic_src . '" class = "post-image" >';
 					
 					echo '<div class = "post_text">';
 					echo "<br>$text";
@@ -198,14 +192,6 @@
   						
   					}
 	  				echo'</div>
-	  					<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-	   					 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	   						 <span class="sr-only">Previous</span>
-	 					 </a>
-	 						 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-	   						 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    				<span class="sr-only">Next</span>
-	  				</a>
 					</div>';
 					
 					echo '</div>';
@@ -225,7 +211,7 @@
     //PREMI E OFFERTE
             echo '<div class="awards">';
             echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
-            $query = "select * from awards";
+            $query = "select * from premi";
 
 
             echo '</div>';

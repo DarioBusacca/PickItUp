@@ -21,6 +21,7 @@ create table Friendship(
 		references user_profile(username),
 	primary key (profile_accept, profile_request)
 );
+
 CREATE TABLE messages (
   message_id  SERIAL PRIMARY KEY,
   username varchar(30) not null,
@@ -31,6 +32,7 @@ CREATE TABLE messages (
   user_profile(username),
 	foreign key (room_id) references 
 	challenge_room(room_id)
+)
 
 
 create table post (
@@ -88,6 +90,7 @@ create table partecipa(
 create table aziende(
 	codice varchar(20) primary key,
 	nome varchar(20),
+	logo text,
 	sito text
 );
 
