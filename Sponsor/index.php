@@ -23,7 +23,7 @@
 
     <body>
         <div class="banner">
-        <div class="logo" id="logo">PICKITUP</div>
+    	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
         <script type="text/javascript">
         document.getElementById("logo"). onclick = function () {
             var url_string = window.location.href;
@@ -36,8 +36,8 @@
         <input type="text" name="search" placeholder="Search">
         <input type="submit" class="search-btn" value="SEARCH">
         </form>
-        <a  class = "nav-link" href="../Sfide/index.php?username=<?php echo $username ?>">CHALLENGES</a>
-        <a  class = "nav-link" href="index.php?username=<?php echo $username ?>">MAP</a>
+        <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username ?>">CHALLENGES</a>
+        <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username ?>">MAP</a>
         <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username ?>">SPONSORS</a>
         <img  id = "profile_picture" src=<?php echo $pic; ?>>
         <button id="settings-btn" class="nav-button">SETTINGS</button>

@@ -25,13 +25,13 @@ create table Friendship(
 CREATE TABLE messages (
   message_id  SERIAL PRIMARY KEY,
   username varchar(30) not null,
-  room_id int NOT NULL,
+  challenge_id int NOT NULL,
   msg text not null,
   times timestamp  default current_timestamp,
   foreign key (username) references 
-  user_profile(username),
-	foreign key (room_id) references 
-	challenge_room(room_id)
+  	user_profile(username),
+  foreign key (challenge_id) references 
+	challenges(challenge_id)
 )
 
 
@@ -44,31 +44,11 @@ create table post (
 	foreign key(profile_id)
 		references user_profile(username)
 );
-CREATE TABLE room_member (
-  id serial  primary key,
-  username varchar(30) NOT NULL,
-  room_id int NOT NULL,
-  times timestamp default current_timestamp,
-  foreign key (username) references
-  user_profile(username),
-  foreign key (room_id) references
- challenge_room(room_id)
-);
 
-create table challenge_room (
-	room_id SERIAL primary key,
-	challenge_id int,
-	description text,
-	foreign key(challenge_id)
-		references challenges(challenge_id),
-	times timestamp default current_timestamp,
-	creator varchar(30),
-	foreign key(creator) 
-		references user_profile(username)
-);
 create table challenges(
 	challenge_id SERIAL primary key,
 	creator varchar(30),
+	description text,
 	times timestamp default current_timestamp,
 	luogo text,
 	nPartecipanti integer,

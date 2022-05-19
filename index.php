@@ -29,7 +29,7 @@
 <body>
 <!--BANNER-->
 	<div class="banner">
-		<span class="logo">PICKITUP</span>
+    	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" name="search" placeholder="Search">
 			<input type="submit" class="search-btn" value="SEARCH">

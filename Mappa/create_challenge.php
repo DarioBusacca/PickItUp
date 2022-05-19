@@ -12,8 +12,7 @@
     $lng = $arr[1];
     $radius = $_GET['radius'];
     $luogo = $lat . ':'.$lng . ':'. $radius;
-    $query = "insert into challenges (creator,luogo,nPartecipanti) values ($1,$2,1)";
-    $result = pg_query_params($dbconn, $query, array($username,$luogo));
+    
        
 ?>
 <!DOCTYPE html>
@@ -44,18 +43,14 @@
 if ((isset($_POST['create-button']))) {
   
    $descr =$_POST['description']; 
+   $query = "insert into challenges (creator,luogo,nPartecipanti,description) values ($1,$2,1,$3)";
+    $result = pg_query_params($dbconn, $query, array($username,$luogo,$descr));
    $query = "select challenge_id from challenges where luogo=$1";
    $result = pg_query_params($dbconn,$query,array($luogo));
    $line=pg_fetch_array($result,null,PGSQL_ASSOC);
    $challenge_id=$line['challenge_id'];
-   $query = "insert into challenge_room (challenge_id,creator,description) values ($1,$2,$3)";
-   $result=pg_query_params($dbconn,$query,array($challenge_id,$username,$descr));
-   $query = "select room_id from challenge_room where challenge_id=$1";
-   $result=pg_query_params($dbconn,$query,array($challenge_id));
-   $line = pg_fetch_array($result,null,PGSQL_ASSOC);
-   $room_id=$line['room_id'];
-   $query = "insert into room_member(username,room_id) values ($1,$2)";
-   $result = pg_query_params($dbconn,$query,array($username,$room_id));
+   $query = "insert into partecipa(profile_id,challenge_id) values ($1,$2)";
+   $result = pg_query_params($dbconn,$query,array($username,$challenge_id));
    if($result){
         header('location: ../Challenge/index.php?username=' . $username );
       } 
