@@ -85,11 +85,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
             $picture=$l['picture'];
             if($user == $username){
               $chat.= '<div class=\"user_msg\">'.
-             $msg. '<img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
+             $msg. '<img id = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
             }
             else{
               $chat.= '<div class=\"msg\">'.
-               $msg. '<img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
+               $msg. '<img id = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
             }
 
 

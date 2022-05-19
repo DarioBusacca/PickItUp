@@ -9,6 +9,6 @@ if(isset($_POST['send-btn'])){
     $query ="insert into messages(username,challenge_id,msg) values($1,$2,$3);";
     $result=pg_query_params($dbconn,$query,array($username,$challenge_id,$msg_to_send));
     if($result)
-    header('./index.php?username='.$username);
+        header('location: ./index.php?username=' . $username.'&id='.$challenge_id);
 }
 ?>

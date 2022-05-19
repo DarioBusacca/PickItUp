@@ -115,12 +115,13 @@
     //TIMELINE
         echo '<div class="timeline" >';
              
-			 $q1 = "select post_id, profile_id, written_text, picture, media_location
+			$q1 = "select post_id, profile_id, written_text, picture, media_location
 			 		from post join user_profile on profile_id = username
 					order by post.times";
-             $q2 = "select challenge_id, luogo, npartecipanti
-			 		from challenges
-					order by times";
+            
+			$q2 = "select challenge_id, luogo, npartecipanti, creator, picture, description
+			 		from challenges c join user_profile on creator = username
+					order by c.times";
 			
 			$result1 = pg_query($dbconn, $q1);
 			$result2 = pg_query($dbconn, $q2);
@@ -133,13 +134,22 @@
 				else if($i == $rand){
 					$line = pg_fetch_array($result2, null, PGSQL_ASSOC);
 					if($line){
+						$profile = $line['creator'];
+						$profile_pic = $line['picture'];
+						$profile_pic = substr($profile_pic, 3);
+						$desc = $line['description'];
 						$id = $line['challenge_id'];
 						$info = $line['luogo'];
 						$nPart = $line['npartecipanti'];
 						echo '<div class = "post">';
-						echo '<form method = "GET" action = "Challenge/partecipa_challenge.php?username=' . $username . '$id=' . $id . '">';
-						echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
-						echo '</form>';
+							echo '<div class = post_banner>';
+								echo '<img src = "'.$prof_pic.'" id = "post-profile_picture">';
+								echo '<div class="post_banner-username">'.$profile.'</div>';
+							echo '</div>';
+
+							echo '<form method = "GET" action = "Challenge/partecipa_challenge.php?username=' . $username . '$id=' . $id . '">';
+							echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
+							echo '</form>';
 						echo '</div>';
 						$i -= $rand;
 					}else
@@ -152,24 +162,15 @@
 					$post_id = $line['post_id'];
 
 					echo '<div class = "post">';
-					$arr = explode("/", $media);
-					$profile_src = $arr[0].'/'.$arr[1];
-					$profile_src = scandir($profile_src);
-					for($j = 0; $j < count($profile_src); $j++){
-						if(!is_numeric($profile_src)){
-							$profile_pic_src = $profile_src[$j];
-						}
-					}
+					
 					$prof_pic = substr($profile_pic, 3);
-					$profile_pic_src = $arr[0].'/'.$arr[1].'/'.$profile_pic_src;
-					$media=$media . $post_id;
+					
 					$media_array = scandir($media);
 					
 					echo '<div class = "post_banner">';
 					echo '<img src = "'.$prof_pic.'" id = "post-profile_picture">';
 					echo '<div class="post_banner-username">'.$profile.'</div>';
 					echo '</div>';
-					echo '<img src = "' . $profile_pic_src . '" class = "post-image" >';
 					
 					echo '<div class = "post_text">';
 					echo "<br>$text";
