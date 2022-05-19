@@ -10,14 +10,17 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PickItUp | Challenges</title>
-  <link rel="stylesheet" type="text/css" href="../style.css">
   <link rel="stylesheet" type="text/css" href="./challenge-style.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>

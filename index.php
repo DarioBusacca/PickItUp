@@ -37,7 +37,7 @@
 		<a  class = "nav-link" href="Challenge/index.php?username=<?php echo $username?>">CHALLENGES</a>
 		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
 		<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>">SPONSORS</a>
-		<img  id = "profile_picture" src=<?php echo $userpic_src; ?>>
+		<img  class = "profile_picture" src=<?php echo $userpic_src; ?>>
 		<button id="settings-btn" class="nav-button">SETTINGS</button>
 		<script type="text/javascript">
 			document.getElementById("settings-btn"). onclick = function () {
@@ -85,7 +85,7 @@
             	echo '<div class="leaderboard-element">';
             	echo '<div  class= "position">'. $pos. '°</div>';
             	echo '<div  class= "user">'. $profile_id . '</div>';
-            	echo '<img   src ="'.$pic_src . '" id="profile_picture">';
+            	echo '<img   src ="'.$pic_src . '" class="profile_picture">';
             	echo '<div class = "points">' . $points .'</div>';
           		echo ' </div><br>';
             	$pos += 1;
@@ -102,7 +102,7 @@
             	echo '<div style="display:flex; class="leaderboard-element">';
             	echo '<div flex = "1" class= "position">'. $user_pos. '</div>';
             	echo '<div flex = "1" class= "user">'. $username . '</div>';
-            	echo '<img  flex = "2" src ="'.$userpic_src . '" id="profile_picture">';
+            	echo '<img  flex = "2" src ="'.$userpic_src . '" class="profile_picture">';
             	echo '<div flex="0.5" >' . $points .'</div>';
             	echo '</div>';
             	
@@ -143,7 +143,7 @@
 						$nPart = $line['npartecipanti'];
 						echo '<div class = "post">';
 							echo '<div class = post_banner>';
-								echo '<img src = "'.$prof_pic.'" id = "post-profile_picture">';
+								echo '<img src = "'.$prof_pic.'" class = "post-profile_picture">';
 								echo '<div class="post_banner-username">'.$profile.'</div>';
 							echo '</div>';
 
@@ -168,32 +168,33 @@
 					$media_array = scandir($media);
 					
 					echo '<div class = "post_banner">';
-					echo '<img src = "'.$prof_pic.'" id = "post-profile_picture">';
+					echo '<img src = "'.$prof_pic.'" class = "post-profile_picture">';
 					echo '<div class="post_banner-username">'.$profile.'</div>';
 					echo '</div>';
+					
+					
+					echo '<div class = "post_media">';
+					echo '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">';
+					for ($j=2; $j < count($media_array) ; $j++) {
+						$src = $media. '/' .$media_array[$j];
+						if($j == 2){
+							echo '<div   id ="post_img"class="carousel-item active">
+							<img id="post_pic" class="d-block w-100" src="'. $src.'" >
+							</div>';
+						}else{
+							echo '<div  id="post_img" class="carousel-item ">
+							<img    class="d-block w-100" src="'.$src.'" >
+							</div>';
+						}
+						
+					}
+					echo'</div>
+					</div>';
 					
 					echo '<div class = "post_text">';
 					echo "<br>$text";
 					echo '</div>';
-
-					echo '<div class = "post_media">';
-					echo '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  						<div class="carousel-inner">';
-  					for ($j=2; $j < count($media_array) ; $j++) {
-  						$src = $media. '/' .$media_array[$j];
-  						if($j == 2){
-  							echo '<div   id ="post_img"class="carousel-item active">
-     						 <img id="post_pic" class="d-block w-100" src="'. $src.'" >
-    								</div>';
-  						}else{
-  							echo '<div  id="post_img" class="carousel-item ">
-     						 <img    class="d-block w-100" src="'.$src.'" >
-    								</div>';
-  						}
-  						
-  					}
-	  				echo'</div>
-					</div>';
 					
 					echo '</div>';
 					echo '<div class="post_lower_banner"';

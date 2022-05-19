@@ -90,7 +90,7 @@
 	margin-right: 30px;
 
 }
-#profile_picture {
+.profile_picture {
 	border-radius: 50%;
 	border-style: solid;
 	border-color: white;
@@ -189,7 +189,7 @@
 	align-items: center;
 }
 
-#post-profile_picture {
+.post-profile_picture {
 	border-radius: 50%;
 	border-style: solid;
 	border-color: white;
@@ -205,6 +205,16 @@
 
 }
 
+.post_text{
+	margin: 10px 0;
+	font-size: 18px;
+	line-height: 20px;
+	font-family:Verdana, sans-serif;
+}
+.post_text span{
+	font-weight: normal;
+	margin-right: 10px;
+}
 
 /****************************
 Tablet
