@@ -212,8 +212,15 @@
     //PREMI E OFFERTE
             echo '<div class="awards">';
             echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
-            $query = "select * from premi";
+            $query = "select * from premi order by premio_id";
 			
+			$result1 = pgquery($dbconn, $q1);
+			while($line = pg_fetch_array($result1, null, PGSQL_ASSOC)){
+				$prezzo = $line['prezzo'];
+				$azienda = $line['azienda_id'];
+				$premio = $line['premio'];
+				$quantita = $line['quantita'];
+			}
             echo '</div>';
     //FINE PREMI E OFFERTE
         ?> 
