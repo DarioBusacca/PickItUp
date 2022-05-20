@@ -86,7 +86,7 @@ create table premi(
 
 create table premio_acquisito(
 	profile_id varchar(30),
-	premio varchar(10),
+	premio SERIAL,
 	foreign key(profile_id)
 		references user_profile(username),
 	foreign key(premio)

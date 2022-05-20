@@ -14,7 +14,6 @@ $query = "insert into partecipa (profile_id,challenge_id) values ($1,$2)";
 $result = pg_query_params($dbconn,$query,array($username,$challenge_id));
 
 if($result){
-	header('location: ./index.php?username=' . $username );
+	header("location: ../Challenge/index.php?username=".$username);
 }
-
 ?>

@@ -18,7 +18,7 @@
 	<title>PickItUp | HomePage</title>
 
     <link rel="stylesheet" href="style.css"/>
-
+	<script type="text/javascript" src="slideshow.js"></script>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,9 +141,10 @@
 						$id = $line['challenge_id'];
 						$info = $line['luogo'];
 						$nPart = $line['npartecipanti'];
+
 						echo '<div class = "post">';
 							echo '<div class = post_banner>';
-								echo '<img src = "'.$prof_pic.'" class = "post-profile_picture">';
+								echo '<img src = "'.$profile_pic.'" class = "post-profile_picture">';
 								echo '<div class="post_banner-username">'.$profile.'</div>';
 							echo '</div>';
 
@@ -161,46 +162,44 @@
 					$media = $line['media_location'];
 					$post_id = $line['post_id'];
 
-					echo '<div class = "post">';
+				echo '<div class = "post">';
 					
 					$prof_pic = substr($profile_pic, 3);
 					
-					$media_array = scandir($media);
-					
+					$images = glob($media."/*.jpg");
+
 					echo '<div class = "post_banner">';
 					echo '<img src = "'.$prof_pic.'" class = "post-profile_picture">';
 					echo '<div class="post_banner-username">'.$profile.'</div>';
 					echo '</div>';
+				
+				//SLIDESHOW CONTAINER
+					echo '<div class = "slideshow-container">';
 					
-					
-					echo '<div class = "post_media">';
-					echo '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-					<div class="carousel-inner">';
-					for ($j=2; $j < count($media_array) ; $j++) {
-						$src = $media. '/' .$media_array[$j];
-						if($j == 2){
-							echo '<div   id ="post_img"class="carousel-item active">
-							<img id="post_pic" class="d-block w-100" src="'. $src.'" >
-							</div>';
-						}else{
-							echo '<div  id="post_img" class="carousel-item ">
-							<img    class="d-block w-100" src="'.$src.'" >
-							</div>';
-						}
-						
+					foreach($images as $image){
+						echo '<div class = "mySlides fade">';
+						echo '<img src ="'.$image.'" style = "width:100%">';
+						echo '</div>';
 					}
-					echo'</div>
-					</div>';
+
+					echo '<a class ="prev" onclick = "plusSlides(-1)">&#10094;</a>';
+					echo '<a class ="next" onclick = "plusSlides(+1)">&#10095;</a>';
+
+					echo '</div>'; //END SLIDESHOW
+
+					//dots/circles
+					echo '<div style = "text-align: center">';
+					for ($j = 0; $j < count($images); $j++){
+						print_r($j);
+						echo '<span class = "dot" onclick = "currentSlide('.$j.')"></span>';
+					}
+					echo '</div>';
 					
 					echo '<div class = "post_text">';
 					echo "<br>$text";
 					echo '</div>';
-					
-					echo '</div>';
-					echo '<div class="post_lower_banner"';
-					echo '<a href="./like.php" style="cursor:pointer;"> <i  id="like-btn"class="uil uil-thumbs-up"></i></a>';
-					echo '</div>';
-					echo '</div>';
+				
+				echo '</div>';
 					$rand = rand(0, 10);
 					$i += 1;
 				}
@@ -214,8 +213,7 @@
             echo '<div class="awards">';
             echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
             $query = "select * from premi";
-
-
+			
             echo '</div>';
     //FINE PREMI E OFFERTE
         ?> 

@@ -39,7 +39,7 @@
         <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username ?>">CHALLENGES</a>
         <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username ?>">MAP</a>
         <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username ?>">SPONSORS</a>
-        <img  id = "profile_picture" src=<?php echo $pic; ?>>
+        <img  class = "profile_picture" src=<?php echo $pic; ?>>
         <button id="settings-btn" class="nav-button">SETTINGS</button>
         <script type="text/javascript">
         document.getElementById("settings-btn"). onclick = function () {
