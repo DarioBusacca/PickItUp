@@ -98,11 +98,6 @@
 	height: 60px;
 	
 }
-.awards {
-	flex-grow: 2;
-	border-style: hidden hidden hidden solid;
-	border-color: lightgrey;
-}
 .leaderboard-element {
 	width: 250px;
 	margin-bottom: 4px;
@@ -111,7 +106,6 @@
 	border-style: none outset outset none;
 	display: flex;
 	flex-direction: row;
-
 }
 .position {
 	padding-top: 20px;
@@ -259,6 +253,21 @@
 	background-color: #717171;
 }
 
+.awards {
+	flex-grow: 2;
+
+	border-style: hidden hidden hidden solid;
+	border-color: lightgrey;
+}
+.awards_item {
+	width: 250px;
+	margin-bottom: 4px;
+	height: 50px;
+	border-color: #ffffff;
+	border-style: none;
+	display: flex;
+	flex-direction: row;
+}
 
 /*fading animation*/
 .fade{
