@@ -148,7 +148,7 @@
 								echo '<div class="post_banner-username">'.$profile.'</div>';
 							echo '</div>';
 
-							echo '<form method = "GET" action = "Challenge/partecipa_challenge.php?username=' . $username . '$id=' . $id . '">';
+							echo '<form method = "POST" action = "Challenge/partecipa_challenge.php?username='.$username.'&id='.$id . '">';
 							echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
 							echo '</form>';
 						echo '</div>';
