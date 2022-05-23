@@ -64,7 +64,7 @@
                     $sito_href = $line['sito'];
                     $descr = $line['description'];
                     $media = $line['media_location'];
-                    $logo = $media .'/logo.jpg';
+                    $logo = $media .'/logo.jpeg';
 
                 echo '<div class = "post">';
                     
@@ -72,7 +72,7 @@
                     $images = glob($media."/ad/*.jpg");
 
                     echo '<div class = "post_banner">';
-                    echo '<img src = "'.$logo.'" class = "post-profile_picture">';
+                    echo '<img src = "'.$logo.'" class = "profile_picture">';
                     echo '<div class="post_banner-username">'.$azienda.'</div>';
                     echo '</div>';
                 

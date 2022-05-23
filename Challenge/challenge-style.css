@@ -14,9 +14,9 @@ main {
 	display: flex;
 	flex-direction: column;
 	height: 700px;
-	flex-grow: 3;
-	overflow-y: scroll;
-	border-style: solid;
+	/* flex-grow: 3; */
+	overflow-y: hidden scroll;
+	border-style: none;
 	border-color: black;
 	margin-right: 20px;
 }
@@ -34,13 +34,25 @@ main {
 	background-color: green;
 	/**/
 }
+
+.your_challenges{
+	border-style: hidden;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
 div[id^="challenge_active_"] {
     height: 70px;
     width: 300px;
-    border-style: solid;
-    border-color: black;
+    border-style: hidden;
+	background-color: #ccc;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 10px;
+	border-radius: 20%;
+}
+.challenge_text{
+	margin-top: 20px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 #chat_banner{

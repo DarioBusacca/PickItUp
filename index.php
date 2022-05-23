@@ -62,7 +62,7 @@
 		<?php
         	
             echo ('<div  class="leaderboard" >' );
-            echo ('<div class="titolo-sezione">LEADERBOARD</div><br>');
+            echo ('<div class="titolo-sezione">LEADERBOARD</div>');
             $query="
             (select username, picture, points as punti
 			from user_profile as u           
@@ -87,7 +87,7 @@
             	echo '<div  class= "user">'. $profile_id . '</div>';
             	echo '<img   src ="'.$pic_src . '" class="profile_picture">';
             	echo '<div class = "points">' . $points .'</div>';
-          		echo ' </div><br>';
+          		echo ' </div>';
             	$pos += 1;
             }
             
@@ -174,44 +174,64 @@
 					echo '</div>';
 				
 				//SLIDESHOW CONTAINER
-					echo '<div class = "slideshow-container">';
+				echo '<div class = "slideshow-container" >';
+
+
+				foreach($images as $image){
 					
-					foreach($images as $image){
-						echo '<div class = "mySlides fade">';
+						echo '<div class = "mySlides_'.$post_id.' fade">';
 						echo '<img src ="'.$image.'" style = "width:100%">';
 						echo '</div>';
-					}
-
-					echo '<a class ="prev" onclick = "plusSlides(-1)">&#10094;</a>';
-					echo '<a class ="next" onclick = "plusSlides(+1)">&#10095;</a>';
-
-					echo '</div>'; //END SLIDESHOW
-
-					//dots/circles
-					echo '<div style = "text-align: center">';
-					for ($j = 1; $j <= count($images); $j++){
-						print_r($j);
-						echo '<span class = "dot" onclick = "currentSlide('.$j.')"></span>';
-					}
-					echo '</div>';
-					
-					echo '<div class = "post_text">';
-					echo "<br>$text";
-					echo '</div>';
-				
-				echo '</div>';
-					$rand = rand(0, 10);
-					$i += 1;
 				}
-			}
+				if(count($images) > 1){
+					echo '<a id ="prev '.$post_id.'" >&#10094;</a>';
+					echo '<a id ="next '.$post_id.'" >&#10095;</a>';
+				}
+				echo '</div>'; //END SLIDESHOW
+
+				//dots/circles Fanculo sti cazzo de cerchi de merdaaa
+				echo '<div style = "text-align: center">';
+				/*for ($j = 1; $j <= count($images); $j++){
+						echo '<span class = "dot_'.$post_id.'" onclick = "currentSlide('.$j.',"mySlides_'.$post_id.'","dot_'.$post_id.'");"></span>';
+					
+				}*/
+				$script = '<script>
+				document.getElementById("prev '.$post_id.'"). onclick= function() {
+					plusSlides(-1,"mySlides_'.$post_id.'");
+				}
+				</script>';
+				echo $script;
+				$script='<script>
+				document.getElementById("next '.$post_id.'"). onclick= function() {
+					plusSlides(+1,"mySlides_'.$post_id.'");
+				}
+				</script>';
+				echo $script;
+				echo '</div>';
+
+				echo '<script>';
+				$script='initSlideShow("mySlides_'.$post_id.'","dot_'.$post_id.'");';
+				echo $script;
+				echo '</script>';
+				
+				echo '<div class = "post_text">';
+				echo "<br>$text";
+				echo '</div>';
+			
 			echo '</div>';
-    //FINE TIMELINE
+				$rand = rand(0, 10);
+				$i += 1;
+			}
+		}
+		echo '</div>';
+//FINE TIMELINE
+
 
 
 
 		//PREMI E OFFERTE
 		echo '<div class="awards">';
-		echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
+		echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div>');
 		$query = "select  prezzo, nome, premio, quantita,p.media_location as media1,a.media_location as media2
 					from premi p join aziende a on codice = azienda_id
 					order by premio_id";
@@ -226,12 +246,12 @@
 			$quantita = $line['quantita'];
 			$media_premio = $line['media1'];
 			$media_az = $line['media2'];
-			$logo=$media_az.'/logo.jpg';
+			$logo=$media_az.'/logo.jpeg';
 
 			echo '<div class = "awards_item">
-					<img class = "post-profile_picture" src ="' .$logo.'">
+					<img class = "profile_picture" src ="' .$logo.'">
 					<div class = "post_text">'.$premio.'</div>
-					<div class = "award_price">'.$prezzo.'</div>
+					<div class = "awards_price">'.$prezzo.'</div>
 				</div>';
 		}
 		echo '</div>';

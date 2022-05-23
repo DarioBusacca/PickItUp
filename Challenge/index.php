@@ -54,23 +54,30 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 
   </div>
   <!--------FINE BANNER--------->
+  
 
   <!--------MAIN--------->
   <main>
     <div class = "challenges">
       <!--------YOUR CHALLENGES--------->
       <div class = "your_challenges">
-        YOUR CHALLENGES
+        <div class = "titolo-sezione">YOUR CHALLENGES</div>
       <?php
-        $query = "select c.description,p.challenge_id,c.nPartecipanti as quanti
+        $query = "select creator, c.description,p.challenge_id,c.nPartecipanti as quanti
         from challenges c join partecipa p on c.challenge_id=p.challenge_id
         where p.profile_id = $1";
+
         $result = pg_query_params($dbconn,$query,array($username));
+
         while($line = pg_fetch_array($result,null,PGSQL_ASSOC)){
           $challenge_id=$line['challenge_id'];
           $nPart=$line['quanti'];
           $descr = $line['description'];
-          echo '<div id="challenge_active_'.$challenge_id.'">'.$challenge_id;
+          $creator = $line['creator'];
+          echo '<div id="challenge_active_'.$challenge_id.'">';
+            echo '<div class = "challenge_text">Name: '.$descr.'<br>
+                  Creator: '.$creator.'</div>';
+
           $query = "select distinct m.times,m.msg,u.picture,m.username
           from user_profile u left join (
           messages m join partecipa p on (m.username=p.profile_id))
@@ -89,11 +96,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
             $picture=$l['picture'];
             if($user == $username){
               $chat.= '<div class=\"user_msg\">'.
-             $msg. '<img id = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
+             $msg. '<img class = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
             }
             else{
               $chat.= '<div class=\"msg\">'.
-               $msg. '<img id = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
+               $msg. '<img class = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
             }
 
 
