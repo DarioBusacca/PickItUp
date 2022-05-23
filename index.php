@@ -50,7 +50,7 @@
 				</li>
 			</ul>
 		</div>
-		<img style = "float: right" alt = "" class = "profile_picture" src=<?php echo $userpic_src; ?>>
+		<img style = "float: right" alt = "" class = "profile_picture" src=<?php echo $pic; ?>>
 
 			
 	</div>
@@ -209,33 +209,33 @@
 
 
 
-    //PREMI E OFFERTE
-            echo '<div class="awards">';
-            echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
-            $query = "select  prezzo, nome, premio, logo, quantita
-						from premi join aziende on codice = azienda_id
-						order by premio_id";
-			
-			$result1 = pgquery($dbconn, $query);
-			while($line = pg_fetch_array($result1, null, PGSQL_ASSOC)){
+		//PREMI E OFFERTE
+		echo '<div class="awards">';
+		echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div><br>');
+		$query = "select  prezzo, nome, premio, quantita,p.media_location as media1,a.media_location as media2
+					from premi p join aziende a on codice = azienda_id
+					order by premio_id";
+		
+		$result1 = pg_query($dbconn, $query);
+		while($line = pg_fetch_array($result1, null, PGSQL_ASSOC)){
 
-			//NON FUNZIONA QUESTA PARTE 
-				$prezzo = $line['prezzo'];
-				$azienda = $line['nome'];
-				$premio = $line['premio'];
-				$quantita = $line['quantita'];
-				$logo = $line['logo'];
-				$logo_img = substr($logo, 3);
+		
+			$prezzo = $line['prezzo'];
+			$azienda = $line['nome'];
+			$premio = $line['premio'];
+			$quantita = $line['quantita'];
+			$media_premio = $line['media1'];
+			$media_az = $line['media2'];
+			$logo=$media_az.'/logo.jpg';
 
-				echo '<div class = "awards_item">
-						<img class = "post-profile_picture" src ="' .$logo_img.'">
-						<div class = "post_text">'.$premio.'</div>
-						<div class = "award_price">'.$prezzo.'</div>';
-						
-
-			}
-            echo '</div>';
-    //FINE PREMI E OFFERTE
+			echo '<div class = "awards_item">
+					<img class = "post-profile_picture" src ="' .$logo.'">
+					<div class = "post_text">'.$premio.'</div>
+					<div class = "award_price">'.$prezzo.'</div>
+				</div>';
+		}
+		echo '</div>';
+		//FINE PREMI E OFFERTE
         ?> 
        </div>
     </main>

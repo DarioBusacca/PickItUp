@@ -10,7 +10,7 @@ main {
 	flex-direction: row;
   	text-align: center;
 }
-#challenges {
+.challenges {
 	display: flex;
 	flex-direction: column;
 	height: 700px;

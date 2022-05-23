@@ -22,44 +22,44 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PickItUp | Challenges</title>
   <link rel="stylesheet" type="text/css" href="./challenge-style.css">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylblankesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
   <!--------BANNER--------->
   <div class="banner">
-    <a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
-    <form class="searchbar" name="searchbar" method="POST" action="search.php">
-      <input type="search" name="search" placeholder="Search">
-      <i class="uil uil-search" style="margin-right: 200px;"></i>
-      
-    </form>
+    	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
+		<form class="searchbar" name="searchbar" method="POST" action="search.php">
+			<input type="text" name="search" placeholder="Search">
+			<input type="submit" class="search-btn" value="SEARCH">
+		</form>
+
     <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username; ?>">CHALLENGES</a>
     <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username ;?>">MAP</a>
     <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username; ?>">SPONSORS</a>
-    <img  class = "profile_picture" src=<?php echo $pic; ?>>
-    <button id="settings-btn" class="nav-button">SETTINGS</button>
-    <script type="text/javascript">
-      document.getElementById("settings-btn"). onclick = function () {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var username = url.searchParams.get("username"); 
-        location.href = "../Settings/index.php?username="+username;
-      };
-    </script>
-    <button id="logout-btn" class="nav-button" >LOG OUT</button>
-      <script type="text/javascript">
-      document. getElementById("logout-btn"). onclick = function () {
-      location. href = "../Login/login.html";
-      };
-      </script>
+
+    <!--Menu impostazioni-->
+		<div id = "hormenu">
+			<ul>
+				<li>
+					<a href = "#"> Settings </a>
+					<ul>
+						<li> <a href = "./Login/login.html"> Log Out </a></li> 
+						<li> <a href = "#"> MyAccount </li> </a>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<img style = "float: right" alt = "" class = "profile_picture" src=<?php echo $pic; ?>>
+
+
   </div>
   <!--------FINE BANNER--------->
 
   <!--------MAIN--------->
   <main>
-    <div id="challenges">
+    <div class = "challenges">
       <!--------YOUR CHALLENGES--------->
-      <div id="your_challenges">
+      <div class = "your_challenges">
         YOUR CHALLENGES
       <?php
         $query = "select c.description,p.challenge_id,c.nPartecipanti as quanti
@@ -78,6 +78,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           where m.challenge_id = $1
           order by m.times ";
           $r=pg_query_params($dbconn,$query,array($challenge_id));
+
           //CHAT BANNER 
           $chat = "";
           $chat = 'var chat="<div id=\"chat_banner\"></div>';//DA MODIFICARE
@@ -123,7 +124,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
       </div>
       <!--------OTHER_CHALLENGES-------->
       <div id="other_challenges">
-        OTHER CHALLENGES
+        <div class="titolo-sezione" >OTHER CHALLENGES</div>
         <?php
          $query="select p.challenge_id,c.nPartecipanti as quanti
         from challenges c join partecipa p on p.challenge_id=c.challenge_id
@@ -135,6 +136,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
         while($line = pg_fetch_array($result,null,PGSQL_ASSOC)){
           $challenge_id=$line['challenge_id'];
           $nPart=$line['quanti'];
+          echo '<div class="challenge">';
+          echo '<form method = "POST" action = "./partecipa_challenge.php?username=' . $username . '&id=' . $challenge_id . '">';
+              echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
+              echo '</form>';
+          echo '</div>';
         }
         ?>
       </div>
