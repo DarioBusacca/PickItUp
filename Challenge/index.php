@@ -60,6 +60,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
   <!--------MAIN--------->
   <main>
     <div class = "challenges">
+
       <!--------YOUR CHALLENGES--------->
       <div class = "your_challenges">
         <div class = "titolo-sezione">YOUR CHALLENGES</div>
@@ -90,6 +91,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           //CHAT BANNER 
           $chat = "";
           $chat = 'var chat="<div id=\"chat_banner\"></div>';//DA MODIFICARE
+          
           //CHAT
           while($l=pg_fetch_array($r,null,PGSQL_ASSOC)){
             $msg=$l['msg'];
@@ -103,12 +105,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
               $chat.= '<div class=\"msg\">'.
                $msg. '<img class = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
             }
-
-
           }
+
           //INPUT FOR MSG
           $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
-          "<input type=\"text\" name=\"input_msg\" class=\"input_msg\">"+
+          "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';
           $chat_HTML="";
@@ -129,7 +130,9 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           echo '</div>';
         }
       ?>
+
       </div>
+      
       <!--------OTHER_CHALLENGES-------->
       <div id="other_challenges">
         <div class="titolo-sezione" >OTHER CHALLENGES</div>
@@ -153,8 +156,10 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
         ?>
       </div>
     </div>
+   
     <!--------CHAT-------->
     <div id="chat">
+
       <?php
         if(isset($_GET['id'])){
           $id=$_GET['id'];
@@ -181,11 +186,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
                $msg. '<img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
             }
 
-
           }
+
           //INPUT FOR MSG
           $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
-          "<input type=\"text\" name=\"input_msg\" class=\"input_msg\">"+
+          "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';
           $chat_HTML="";
@@ -201,8 +206,8 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           }        
         }
       ?>
-
     </div>
+
   </main>
 
 
