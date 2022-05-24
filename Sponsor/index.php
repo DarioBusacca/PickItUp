@@ -13,11 +13,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="../slideshow.js"></script>
         <title> PickItUp | Sponsors </title>
         <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
 
     </head>
 
@@ -27,7 +29,7 @@
     	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" name="search" placeholder="Search">
-			<input type="submit" class="search-btn" value="SEARCH">
+			<i style="color:white;"class="uil uil-search"></i>
 		</form>
         
         <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username ?>">CHALLENGES</a>
@@ -52,10 +54,9 @@
     <!--SPONSOR TIMELINE-->
     <div class="sponsor_timeline">
     <?php
-
-    echo '<div class="timeline" >';
+        echo '<div class="timeline" >';
              
-            $q1 ="select nome,sito,description,media_location from aziende" ;
+           $q1 ="select nome,sito,description,media_location from aziende" ;
             
             $result = pg_query($dbconn, $q1);
             while($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -64,48 +65,61 @@
                     $sito_href = $line['sito'];
                     $descr = $line['description'];
                     $media = $line['media_location'];
-                    $logo = $media .'/logo.jpeg';
+                    $logo = $media .'/logo.jpg';
 
                 echo '<div class = "post">';
-                    
-                    
                     $images = glob($media."/ad/*.jpg");
 
                     echo '<div class = "post_banner">';
-                    echo '<img src = "'.$logo.'" class = "profile_picture">';
+                    echo '<img src = "'.$logo.'" class = "post-profile_picture">';
                     echo '<div class="post_banner-username">'.$azienda.'</div>';
                     echo '</div>';
                 
                 //SLIDESHOW CONTAINER
-                    echo '<div class = "slideshow-container">';
+                echo '<div class = "slideshow-container" >';
+
+
+                foreach($images as $image){
                     
-                    foreach($images as $image){
-                        echo '<div class = "mySlides fade">';
+                        echo '<div class = "mySlides_'.$azienda.' fade">';
                         echo '<img src ="'.$image.'" style = "width:100%">';
                         echo '</div>';
-                    }
+                }
+                if(count($images) > 1){
+                    echo '<a id ="prev '.$azienda.'" >&#10094;</a>';
+                    echo '<a id ="next '.$azienda.'" >&#10095;</a>';
+                }
+                echo '</div>'; //END SLIDESHOW
 
-                    echo '<a class ="prev" onclick = "plusSlides(-1)">&#10094;</a>';
-                    echo '<a class ="next" onclick = "plusSlides(+1)">&#10095;</a>';
-
-                    echo '</div>'; //END SLIDESHOW
-
-                    //dots/circles
-                    echo '<div style = "text-align: center">';
-                    for ($j = 1; $j <= count($images); $j++){
-                        print_r($j);
-                        echo '<span class = "dot" onclick = "currentSlide('.$j.')"></span>';
-                    }
-                    echo '</div>';
-                    
-                    echo '<div class = "post_text">';
-                    echo "<br>$descr";
-                    echo '</div>';
+                echo '<div style = "text-align: center">';
                 
+                $script = '<script>
+                document.getElementById("prev '.$azienda.'"). onclick= function() {
+                    plusSlides(-1,"mySlides_'.$azienda.'");
+                }
+                </script>';
+                echo $script;
+                $script='<script>
+                document.getElementById("next '.$azienda.'"). onclick= function() {
+                    plusSlides(+1,"mySlides_'.$azienda.'");
+                }
+                </script>';
+                echo $script;
                 echo '</div>';
-                    
-            }
+
+                echo '<script>';
+                $script='initSlideShow("mySlides_'.$azienda.'");';
+                echo $script;
+                echo '</script>';
+                
+                echo '<div class = "post_text">';
+                echo "<br>$descr";
+                echo '</div>';
+            
+            echo '</div>';
+        }
         echo '</div>';
+    
         ?>
     </div>
 

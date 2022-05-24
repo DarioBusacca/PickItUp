@@ -11,6 +11,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
   <link rel="stylesheet" type="text/css" href="../style.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +31,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
     	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" name="search" placeholder="Search">
-			<input type="submit" class="search-btn" value="SEARCH">
+			<i style="color:white;"class="uil uil-search"></i>
 		</form>
 
     <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username; ?>">CHALLENGES</a>

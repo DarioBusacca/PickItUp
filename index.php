@@ -9,6 +9,14 @@
     $line=pg_fetch_array($result,null,PGSQL_ASSOC);
     $pic= $line['picture'];
     $userpic_src=substr($pic, 3);
+    if(isset($_GET['err'])){
+		$err = $_GET['err'];
+		$script='<script>
+		alert("'.$err.'");
+		window.location.href = "./index.php?username='.$username.'";
+		</script>';
+		echo $script;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +27,7 @@
 
     <link rel="stylesheet" href="style.css"/>
 	<script type="text/javascript" src="slideshow.js"></script>
-
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,8 +39,9 @@
 	<div class="banner">
     	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
-			<input type="text" name="search" placeholder="Search">
-			<input type="submit" class="search-btn" value="SEARCH">
+			<input type="text" class="search" name="search" placeholder="Search">
+			<i style="color:white;"class="uil uil-search"></i>
+			
 		</form>
 		<a  class = "nav-link" href="Challenge/index.php?username=<?php echo $username?>">CHALLENGES</a>
 		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
@@ -50,7 +59,7 @@
 				</li>
 			</ul>
 		</div>
-		<img style = "float: right" alt = "" class = "profile_picture" src=<?php echo $pic; ?>>
+		<img style = "float: right" alt = "" class = "profile_picture" src=<?php echo $userpic_src; ?>>
 
 			
 	</div>
@@ -121,10 +130,14 @@
             
 			$q2 = "select challenge_id, luogo, npartecipanti, creator, picture, description
 			 		from challenges c join user_profile on creator = username
+					where challenge_id not in
+			 		(select challenge_id
+			 		from partecipa
+			 		where profile_id = $1)
 					order by c.times";
 			
 			$result1 = pg_query($dbconn, $q1);
-			$result2 = pg_query($dbconn, $q2);
+			$result2 = pg_query_params($dbconn, $q2,array($username));
 			$rand = rand(0, 10);
 			$i = 0;
 			while($line = pg_fetch_array($result1, null, PGSQL_ASSOC)) {
@@ -189,12 +202,8 @@
 				}
 				echo '</div>'; //END SLIDESHOW
 
-				//dots/circles Fanculo sti cazzo de cerchi de merdaaa
 				echo '<div style = "text-align: center">';
-				/*for ($j = 1; $j <= count($images); $j++){
-						echo '<span class = "dot_'.$post_id.'" onclick = "currentSlide('.$j.',"mySlides_'.$post_id.'","dot_'.$post_id.'");"></span>';
-					
-				}*/
+				
 				$script = '<script>
 				document.getElementById("prev '.$post_id.'"). onclick= function() {
 					plusSlides(-1,"mySlides_'.$post_id.'");
@@ -210,7 +219,7 @@
 				echo '</div>';
 
 				echo '<script>';
-				$script='initSlideShow("mySlides_'.$post_id.'","dot_'.$post_id.'");';
+				$script='initSlideShow("mySlides_'.$post_id.'");';
 				echo $script;
 				echo '</script>';
 				
@@ -232,27 +241,38 @@
 		//PREMI E OFFERTE
 		echo '<div class="awards">';
 		echo ('<div class="titolo-sezione">AWARDS&nbsp;&&nbsp;OFFERS</div>');
-		$query = "select  prezzo, nome, premio, quantita,p.media_location as media1,a.media_location as media2
+		$query = "select  premio_id,prezzo, nome, premio,p.media_location as media1,a.media_location as media2
 					from premi p join aziende a on codice = azienda_id
+					where quantita > 0 and premio_id not in
+					(select premio
+					from premio_acquisito
+					where profile_id=$1)
 					order by premio_id";
 		
-		$result1 = pg_query($dbconn, $query);
+		$result1 = pg_query_params($dbconn, $query,array($username));
 		while($line = pg_fetch_array($result1, null, PGSQL_ASSOC)){
 
-		
+			$premio_id=$line['premio_id'];
 			$prezzo = $line['prezzo'];
 			$azienda = $line['nome'];
 			$premio = $line['premio'];
-			$quantita = $line['quantita'];
+		
 			$media_premio = $line['media1'];
 			$media_az = $line['media2'];
-			$logo=$media_az.'/logo.jpeg';
+			$logo=substr($media_az, 3) .'/logo.jpg';
+			$premio_src=glob(substr($media_premio,3).'/*.jpg');
+			$premio_src=$premio_src[0];
 
-			echo '<div class = "awards_item">
-					<img class = "profile_picture" src ="' .$logo.'">
+			echo '<div class = "award_item">
+					<img style="border-style:solid;border-color:green;" class = "profile_picture" src ="'.$logo.'">
+					<img style="position:relative;width:100%;margin-top:0;" src="'.$premio_src.'">
 					<div class = "post_text">'.$premio.'</div>
-					<div class = "awards_price">'.$prezzo.'</div>
+					<a style="text-decoration:none" href="./acquista_premio.php?username='.$username.'&id='.$premio_id.'&p='.$prezzo.'"class = "awards_price">'.$prezzo.'<i  class="uil uil-coins"></i> </a>
 				</div>';
+
+				
+			
+			
 		}
 		echo '</div>';
 		//FINE PREMI E OFFERTE

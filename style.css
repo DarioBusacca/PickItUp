@@ -27,7 +27,11 @@
 	border: none;
 	margin-top: 10px;
 	width: auto;
+	height: 25px;
+	display: inline-flex;
+
 }
+
 .nav-link {
 	margin-right: 20px;
 	width: auto;
@@ -151,6 +155,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	width: 60px;
 	height: 60px;
 	margin-right: 10px;
+
 }
 .leaderboard-element {
 	width: 250px;
@@ -193,15 +198,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	text-align: center;
 	width: 100%;
 }
-.search-btn {
-	padding-bottom: 10px;
-	padding-top: 10px;
-	padding-right: 7px;
-	padding-left: 7px;
-	background-color: #35682d;
-	color: white;
-	border:  hidden;
-}
+
 
 .timeline {
 	/* overflow:hidden; */
@@ -219,7 +216,11 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	height: auto;
 	background-color: #ffffff;
 	border: 1px solid #dfdfdf;
-	margin-top: 20px;
+	margin-top: 1px;
+	margin-bottom: 35px;
+	border-style: solid;
+	border-color: #35682d;
+	border-radius: 4px;
 }
 
 .post_banner{
@@ -228,6 +229,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	display: flex;
 	align-items: center;
 	padding: 0;
+	background-color: #35682d;
 }
 
 .post_banner-username{
@@ -247,6 +249,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	width: 40px;
 	height: 40px;
 	align-items: center;
+	
 }
 
 .post_text{
@@ -254,6 +257,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	font-size: 18px;
 	line-height: 20px;
 	font-family:Verdana, sans-serif;
+	text-align: center;
 }
 .post_text span{
 	font-weight: normal;
@@ -265,6 +269,7 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	width: 500px;
 	position: relative;
 	margin: auto;
+	margin-top: 10px;
 }
 
 div[ class *= 'mySlides_']{
@@ -318,21 +323,35 @@ span[ class *= 'dot_'] {
 	border-style: hidden solid hidden solid;
 	border-color: lightgrey;
 }
-.awards_item {
+.award_item {
 	width: 100%;
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 	height: auto;
 	border-color: #ffffff;
 	border-style: none none ridge none;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	
 }
 .awards_price{
 	padding-top: 20px;
 	padding-right: 7px;
-	text-align: right;
-	width: 50px;
-	color: black;
+	text-align: center;
+	align-items: center;
+	width: 98%;
+	color:#35682d;
+	transition: all 0.6 ease;
+	margin: 0;
+	border-radius: 10px;
+}
+i.uil-coins{
+	color: #35682D;
+}
+.awards_price:hover, i.uil-coins:hover{
+	background-color: #35682d;
+	color: white;
 }
 /*fading animation*/
 .fade{

@@ -6,7 +6,7 @@ create table User_profile (
 	nome varchar(30),
 	cognome varchar(30),
 	times timestamp default current_timestamp,
-	birthday integer,
+	birthday date,
 	picture text,
 	points integer default 0,
 	unique (email)
@@ -93,6 +93,33 @@ create table premio_acquisito(
 		references premi(premio_id),
 	primary key(profile_id, premio)
 );
+create or replace function incrementa_nPart()
+returns trigger as 
+$$
+begin
+update challenges
+set nPartecipanti = nPartecipanti+1
+where challenge_id=new.challenge_id;
+return null;
+end;
+$$ language plpgsql;
+create trigger trigger_nPart after insert on partecipa
+for each row execute procedure incrementa_nPart();
+
+
+create or replace function decrementa_quantita()
+returns trigger as
+$$
+begin
+update premi
+set quantita= quantita -1
+where premio_id=new.premio;
+return null;
+end;
+$$ language plpgsql;
+create trigger trigger_quantita after insert on premio_acquisito
+for each row execute procedure decrementa_quantita();
+
 
 /*I cosi s' fanu giusti na vota e basta!
 

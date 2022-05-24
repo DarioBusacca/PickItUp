@@ -25,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
   </head>
   <script type="text/javascript">
   function initMap() {
@@ -154,7 +155,7 @@
     	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" name="search" placeholder="Search">
-			<input type="submit" class="search-btn" value="SEARCH">
+			<i style="color:white;"class="uil uil-search"></i>
 		</form>
     
       <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username ?>">CHALLENGES</a>
