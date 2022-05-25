@@ -92,7 +92,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 
           //CHAT BANNER 
           $chat = "";
-          $chat = 'var chat="<div id=\"chat_banner\"></div>';//DA MODIFICARE
+          $chat = 'var chat="<div id=\"chat_banner\"></div>';
           
           //CHAT
           while($l=pg_fetch_array($r,null,PGSQL_ASSOC)){
@@ -196,7 +196,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           }
           
           //INPUT FOR MSG
-          $chat = '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
+          $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
           "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';

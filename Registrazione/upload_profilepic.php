@@ -76,8 +76,8 @@
 			$q1="update user_profile set picture=$1 where username=$2";
 			$data= pg_query_params($dbconn,$q1,array($target_file,$username));
 			if($data){
-				echo '<br><a href="../index.php?username='. $username .'" >Click here</a>
-				to PickItUp homepage';
+				header('Location:../index.php?username='. $username);
+
 			}
 		}
 	}

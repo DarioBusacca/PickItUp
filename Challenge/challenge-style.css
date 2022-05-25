@@ -122,39 +122,44 @@ div[id^="challenge_active_"]:hover{
 
 .msg{
 	display: flex;
-	max-width: 200px;
+	max-width: 400px;
 	min-height: auto;
+	margin-top: 5px;
 	flex-direction: row;
 }
 .user_msg{
 	display: flex;
-	max-width: 200px;
+	max-width: 400px;
 	min-height: auto;
 	flex-direction: row;
 	margin-inline-start: auto;
 	justify-content: flex-end;
+	margin-top: 5px;
 }
 .msg_text{
-	text-align: -webkit-center;
+	text-align: -webkit-left;
 	border-style: none;
 	background-color: lightgreen;
 	border-radius: 40%;
 	align-items: center;
 	display: flex;
 	font-size: 24px;
-	padding: 5px 5px;
+	padding-right: 15px;
+	padding-left: 25px;
+
 	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .msg_text_r{
-	text-align: -webkit-center;
+	text-align: -webkit-left;
 	border-style: none;
 	background-color: lightblue;
 	border-radius: 40%;
 	align-items: center;
 	display: flex;
 	font-size: 24px;
-	padding: 5px 5px;
-	padding-top: 2px;
+	padding-right: 15px;
+	padding-top: auto;
+	padding-left: 20px;
 	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 

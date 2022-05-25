@@ -31,7 +31,7 @@
   <font size="30px">PickItUp</font>
   <form flex="1" action="" class="form-create_challenge" method="POST"
   name="myForm">
-    <input type="text"   name="description" placeholder="Add a description">
+    <input type="text"   name="description" placeholder="Add a description (luogo, giorno,...)" autocomplete = "off">
     <br>          
     <input type="submit" value="CREATE CHALLENGE" name="create-button">
   </form>
@@ -43,7 +43,7 @@
 if ((isset($_POST['create-button']))) {
   
    $descr =$_POST['description']; 
-   $query = "insert into challenges (creator,luogo,nPartecipanti,description) values ($1,$2,1,$3)";
+   $query = "insert into challenges (creator,luogo,description) values ($1,$2,$3)";
     $result = pg_query_params($dbconn, $query, array($username,$luogo,$descr));
    $query = "select challenge_id from challenges where luogo=$1";
    $result = pg_query_params($dbconn,$query,array($luogo));

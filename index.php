@@ -110,12 +110,12 @@
             	$result_pos = pg_query_params($dbconn,$query_pos,array($username,$points));
             	$line=pg_fetch_array($result_pos,null,PGSQL_ASSOC);
             	$user_pos=$line['pos'];
-            	echo '<div style="display:flex; class="leaderboard-element">';
-            	echo '<div flex = "1" class= "position">'. $user_pos. '</div>';
-            	echo '<div flex = "1" class= "user">'. $username . '</div>';
-            	echo '<img  flex = "2" src ="'.$userpic_src . '" class="profile_picture">';
-            	echo '<div flex="0.5" >' . $points .'</div>';
-            	echo '</div>';
+            	echo '<div class="leaderboard-element">';
+            	echo '<div  class= "position">'. $pos. '°</div>';
+            	echo '<div  class= "user">'. $profile_id . '</div>';
+            	echo '<img   src ="'.$pic_src . '" class="profile_picture">';
+            	echo '<div class = "points">' . $points .'</div>';
+          		echo ' </div>';;
             	
             }
             echo '</div>';

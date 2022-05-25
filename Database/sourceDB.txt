@@ -16,9 +16,9 @@ create table Friendship(
 	profile_accept varchar(30) not null,
 	profile_request varchar(30) not null,
 	foreign key(profile_accept) 
-		references user_profile(username),
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(profile_request) 
-		references user_profile(username),
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
 	primary key (profile_accept, profile_request)
 );
 
@@ -29,9 +29,9 @@ CREATE TABLE messages (
   msg text not null,
   times timestamp  default current_timestamp,
   foreign key (username) references 
-  	user_profile(username),
+  	user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
   foreign key (challenge_id) references 
-	challenges(challenge_id)
+	challenges(challenge_id) ON UPDATE CASCADE ON DELETE CASCADE
 )
 
 
@@ -42,7 +42,7 @@ create table post (
 	media_location text,
 	times timestamp default current_timestamp,
 	foreign key(profile_id)
-		references user_profile(username)
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table challenges(
@@ -51,9 +51,9 @@ create table challenges(
 	description text,
 	times timestamp default current_timestamp,
 	luogo text,
-	nPartecipanti integer,
-	foreign key(creator)
-		references user_profile(username)
+	nPartecipanti integer default 0,
+	foreign key(creator) 
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
 	points integer default 10
 );
 
@@ -61,9 +61,9 @@ create table partecipa(
 	profile_id varchar(30),
 	challenge_id SERIAL,
 	foreign key(profile_id)
-		references user_profile(username),
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(challenge_id)
-		references challenges(challenge_id),
+		references challenges(challenge_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	primary key(profile_id, challenge_id)
 );
 
@@ -81,16 +81,16 @@ create table premi(
 	premio text,
 	quantita integer,
 	foreign key(azienda_id)
-		references aziende(codice)
+		references aziende(codice) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table premio_acquisito(
 	profile_id varchar(30),
 	premio SERIAL,
 	foreign key(profile_id)
-		references user_profile(username),
+		references user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(premio)
-		references premi(premio_id),
+		references premi(premio_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	primary key(profile_id, premio)
 );
 create or replace function incrementa_nPart()
@@ -120,6 +120,18 @@ $$ language plpgsql;
 create trigger trigger_quantita after insert on premio_acquisito
 for each row execute procedure decrementa_quantita();
 
+create or replace function decrementa_punti()
+returns trigger as
+$$
+begin
+update user_profile
+set points = points - new.prezzo
+where username = new.profile_id;
+return null;
+end;
+$$ language plpgsql;
+create trigger trigger_points after insert on premio_acquisito
+for each row execute procedure decrementa_punti();
 
 /*I cosi s' fanu giusti na vota e basta!
 

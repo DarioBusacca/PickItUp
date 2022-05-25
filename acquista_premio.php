@@ -10,9 +10,9 @@
     $result = pg_query_params($dbconn,$query,array($username));
     $line=pg_fetch_array($result,null,PGSQL_ASSOC);
     if($line['points'] >= $prezzo ){          
-        $query = "insert into premio_acquisito(profile_id,premio)
-        values($1,$2)";
-        $result = pg_query_params($dbconn,$query,array($username,$premio_id));
+        $query = "insert into premio_acquisito(profile_id,premio, prezzo)
+        values($1,$2, $3)";
+        $result = pg_query_params($dbconn,$query,array($username,$premio_id, $prezzo));
         if($result){
             header('Location:./index.php?username='.$username);
         }
