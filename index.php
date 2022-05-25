@@ -43,9 +43,11 @@
 			<i style="color:white;"class="uil uil-search"></i>
 			
 		</form>
-		<a  class = "nav-link" href="Challenge/index.php?username=<?php echo $username?>">CHALLENGES</a>
-		<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
-		<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>">SPONSORS</a>
+		<div class = "button_container">
+			<a  class = "nav-link" href="Challenge/index.php?username=<?php echo $username?>">CHALLENGES</a>
+			<a  class = "nav-link" href="Mappa/index.php?username=<?php echo $username?>">MAP</a>
+			<a  class = "nav-link" href="Sponsor/index.php?username=<?php echo $username?>">SPONSORS</a>
+		</div>
 		
 		<!--Menu impostazioni-->
 		<div id = "hormenu">

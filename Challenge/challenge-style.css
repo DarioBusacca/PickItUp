@@ -17,20 +17,21 @@ main {
 .challenges {
 	display: flex;
 	flex-direction: column;
-	min-height: 700px;
+	height: 700px;
 	width: 50%;
 	/* flex-grow: 3; */
 	overflow-y: auto;
 	border-style: none;
 	border-color: black;
 	margin-right: 20px;
+	display: -webkit-box;
+	display: -webkit-flex;
 }
 #chat {
 	flex-grow: 6;
 	display: flex;
 	flex-direction: column;
-	max-height: 500px;
-	
+	max-height: 700px;
 	overflow: auto;
 	float: right;
 
@@ -48,6 +49,7 @@ main {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+	min-height: 350px;
 }
 
 
@@ -71,7 +73,9 @@ div[id^="challenge_active_"]:hover{
 	color: white;
 }
 .challenge_text{
-	margin-top: 20px;
+	font-size: 20px;
+	margin-top: 7px;
+	margin-bottom: 7px;
 	font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -92,10 +96,13 @@ div[id^="challenge_active_"]:hover{
 }
 .challenge_buttons{
 	display: flex;
+	flex-direction: row;
 	align-content: center;
-	margin-left: 120px;
+	margin: auto;
 	height: auto;
+	font-size: 22px;
 	margin-top: 20px;
+	justify-content: center;
 }
 #chat_banner{
 	display: none;
@@ -104,10 +111,11 @@ div[id^="challenge_active_"]:hover{
 }
 
 #send_message{
-	display: flex;
-	margin: auto;
+	display: block;
+	max-height: fit-content;
+	margin-block-start: auto;
 	align-content: center;
-	
+	margin-bottom: 5px;
 	border-style: hidden;
     border-color: black;
 }
@@ -158,4 +166,3 @@ div[id^="challenge_active_"]:hover{
 	font-size: 16px;
 	border-radius: 10px;
 }
-

@@ -13,11 +13,12 @@
 }
 
 .logo {
-	padding-left: 16px;
-	padding-right: 50px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-right: 20px;
+	margin-top: auto;
+	margin-bottom: auto;
+
+	margin-left: 20px;
+	margin-right: 100px;
+	font-size: 33px;
 	border-color: black;
 	font-family:Square peg;
 	color: white;
@@ -26,15 +27,22 @@
 	margin-right: 180px;
 	border-style: solid;
 	border: none;
-	margin-top: 10px;
+	margin: auto;
 	width: auto;
 	height: 25px;
 	display: inline-flex;
+}
 
+.button_container{
+	display: flex;
+	flex-direction: row;
+	display: -webkit-box;
+	display: -webkit-flex;
+	margin: auto;
 }
 
 .nav-link {
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	width: auto;
 	height: auto;
 	color: white;
@@ -392,8 +400,8 @@ Smartphone
 		flex-direction: row;
 	}
 
-	.nav-link{
-		display: flex;
+	.button_container{
+		display: none;
 	}
 	.post{
 		display: flex;

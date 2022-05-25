@@ -34,9 +34,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 			<i style="color:white;"class="uil uil-search"></i>
 		</form>
 
-    <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username; ?>">CHALLENGES</a>
-    <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username ;?>">MAP</a>
-    <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username; ?>">SPONSORS</a>
+    <div class = "button_container">
+      <a  class = "nav-link" href="../Challenge/index.php?username=<?php echo $username; ?>">CHALLENGES</a>
+      <a  class = "nav-link" href="../Mappa/index.php?username=<?php echo $username ;?>">MAP</a>
+      <a  class = "nav-link" href="../Sponsor/index.php?username=<?php echo $username; ?>">SPONSORS</a>
+    </div>
 
     <!--Menu impostazioni-->
 		<div id = "hormenu">
@@ -191,11 +193,10 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
               $chat.= '<div class=\"msg\">'.
                '<img class=\"profile_picture\" src=\"'.$picture.'\"><div class = \"msg_text_r\">'.$msg.'</div></div>';
             }
-
           }
-
+          
           //INPUT FOR MSG
-          $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
+          $chat = '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
           "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';
