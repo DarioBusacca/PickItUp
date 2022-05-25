@@ -320,7 +320,7 @@ span[ class *= 'dot_'] {
 .awards {
 	display: flex;
 	flex-direction: column;
-	max-width: 300px;
+	min-width: 300px;
 	align-items: center;
 	border-style: hidden ;
 	border-color: lightgrey;
@@ -414,4 +414,13 @@ Smartphone
 	}
 	.nav-link{display: none;}
 	
+}
+
+
+/*SPONSOR TIMELINE STYLE*/
+.sponsor_timeline{
+	width: 70%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
 }

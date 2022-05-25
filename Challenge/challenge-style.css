@@ -30,9 +30,11 @@ main {
 	display: flex;
 	flex-direction: column;
 	max-height: 500px;
-	max-width: 400px;
+	
 	overflow: auto;
 	float: right;
+
+	overflow-x: hidden;
 
 	border-style: hidden;
 	border-color: darkgrey;
@@ -94,6 +96,7 @@ div[id^="challenge_active_"] {
 	min-height: auto;
 	flex-direction: row;
 	margin-inline-start: auto;
+	justify-content: flex-end;
 }
 .msg_text{
 	text-align: -webkit-center;
@@ -109,12 +112,13 @@ div[id^="challenge_active_"] {
 .msg_text_r{
 	text-align: -webkit-center;
 	border-style: none;
-	background-color: greenyellow;
+	background-color: lightblue;
 	border-radius: 40%;
 	align-items: center;
 	display: flex;
 	font-size: 24px;
 	padding: 5px 5px;
+	padding-top: 2px;
 	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
