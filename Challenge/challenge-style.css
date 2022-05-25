@@ -43,32 +43,60 @@ main {
 	background-repeat: no-repeat;
 }
 
-.your_challenges{
+.your_challenges,.other_challenges{
 	border-style: hidden;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 }
 
-.challenge{
-	display: flex;
-	flex-direction: row;
-}
 
-div[id^="challenge_active_"] {
-    height: 70px;
+
+div[id^="challenge_active_"] ,.challenge{
+    height: auto;
     width: 80%;
     border-style:ridge;
-	background-color: #ccc;
+	background-color: #90EE90;
+	color: #35682d;
     cursor: pointer;
     margin: auto;
-	border-radius: 50%;
+	margin-top:5px ;
+	margin-bottom: 5px;
+	font-weight: bolder;
+	transition: all 0.6s ease;
+	border-radius: 5px;
+}
+div[id^="challenge_active_"]:hover{
+	background-color: #35682d;
+	color: white;
 }
 .challenge_text{
 	margin-top: 20px;
 	font-family: Arial, Helvetica, sans-serif;
-}
 
+}
+.challenge-button{
+	width: auto;
+	height: auto;
+	padding: 6px 4px 6px 4px;
+	color: white;
+	background-color:#35682d ;
+	transition: all 0.6s ease;
+	margin-left: 20px;
+	border-radius: 10px;
+}
+.challenge-button:hover{
+	background-color: white;
+	color: #35682d;
+
+}
+.challenge_buttons{
+	display: flex;
+	align-content: center;
+	margin-left: 120px;
+	height: auto;
+	margin-top: 20px;
+}
 #chat_banner{
 	display: none;
 	border-style: hidden;

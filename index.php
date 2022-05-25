@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="style.css"/>
 	<script type="text/javascript" src="slideshow.js"></script>
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
-
+	<link rel="stylesheet" type="text/css" href="./Challenge/challenge-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Square+Peg&family=Tapestry&display=swap" rel="stylesheet">
@@ -150,9 +150,9 @@
 						$profile = $line['creator'];
 						$profile_pic = $line['picture'];
 						$profile_pic = substr($profile_pic, 3);
-						$desc = $line['description'];
+						$descr = $line['description'];
 						$id = $line['challenge_id'];
-						$info = $line['luogo'];
+						$luogo = $line['luogo'];
 						$nPart = $line['npartecipanti'];
 
 						echo '<div class = "post">';
@@ -161,9 +161,14 @@
 								echo '<div class="post_banner-username">'.$profile.'</div>';
 							echo '</div>';
 
-							echo '<form method = "POST" action = "Challenge/partecipa_challenge.php?username='.$username.'&id='.$id . '">';
-							echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
-							echo '</form>';
+							echo '<div class="challenge">';
+          echo '<div class="challenge_text">'.$descr.'</div>';
+          echo '<div class="challenge_buttons">';
+          echo '<a  style="text-decoration:none;" class = "challenge-button" href="./Challenge/partecipa_challenge.php?username='.$username.'&id='.$id.'&l='.$luogo.'" >PARTECIPA </a>';
+          
+          echo '<a  style="text-decoration:none;" class = "challenge-button" href="./Mappa/index.php?username='.$username.'&id='.$id.'&l='.$luogo.'" >CHALLENGE LOCATION </a>';
+          echo '</div>';
+          echo '</div>';
 						echo '</div>';
 						$i -= $rand;
 					}else

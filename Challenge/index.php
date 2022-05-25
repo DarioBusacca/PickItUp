@@ -77,7 +77,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           $descr = $line['description'];
           $creator = $line['creator'];
           echo '<div id="challenge_active_'.$challenge_id.'">';
-            echo '<div class = "challenge_text">Name: '.$descr.'<br>
+            echo '<div class = "challenge_text"> '.$descr.'<br>
                   Creator: '.$creator.'</div>';
 
           $query = "select distinct m.times,m.msg,u.picture,m.username
@@ -137,7 +137,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
       <div id="other_challenges">
         <div class="titolo-sezione" >OTHER CHALLENGES</div>
         <?php
-         $query="select p.challenge_id,c.nPartecipanti as quanti
+         $query="select c.description,c.creator,p.challenge_id,c.nPartecipanti as quanti,c.luogo
         from challenges c join partecipa p on p.challenge_id=c.challenge_id
         where not exists
         (select profile_id
@@ -147,11 +147,16 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
         while($line = pg_fetch_array($result,null,PGSQL_ASSOC)){
           $challenge_id=$line['challenge_id'];
           $nPart=$line['quanti'];
+          $luogo=$line['luogo'];
+          $descr=$line['description'];
+          $creator=$line['creator'];
           echo '<div class="challenge">';
-          echo '<form method = "POST" action = "./partecipa_challenge.php?username=' . $username . '&id=' . $challenge_id . '">';
-              echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
-            echo '</form>';
-          echo '<a  class = \"nav-link\" href=\"../Mappa/index.php?username='.$username.'&id='.$challenge_id.'&l='.$luogo.'\" >CHALLENGE LOCATION </a>';
+          echo '<div class="challenge_text">'.$descr.'</div>';
+          echo '<div class="challenge_buttons">';
+          echo '<a  style="text-decoration:none;" class = "challenge-button" href="./partecipa_challenge.php?username='.$username.'&id='.$challenge_id.'&l='.$luogo.'" >PARTECIPA </a>';
+          
+          echo '<a  style="text-decoration:none;" class = "challenge-button" href="../Mappa/index.php?username='.$username.'&id='.$challenge_id.'&l='.$luogo.'" >CHALLENGE LOCATION </a>';
+          echo '</div>';
           echo '</div>';
         }
         ?>
@@ -190,7 +195,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           }
 
           //INPUT FOR MSG
-          $chat .= '<div id="send_message"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
+          $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
           "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';

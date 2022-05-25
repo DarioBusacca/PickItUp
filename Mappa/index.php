@@ -42,7 +42,6 @@ if (url.searchParams.has("l") == true)
       let lng = arr[1];
       let rad =parseInt(arr[2]);
       const myLatlng = new google.maps.LatLng(lat,lng);
-      alert(myLatlng);
       const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
         center: myLatlng,
@@ -60,10 +59,13 @@ if (url.searchParams.has("l") == true)
           editable : false,
           draggable : false,
         });
+      var username = url.searchParams.get("username"); 
         challenge_zone.addListener('click', () => {
-           const contentString ='<div id="create_challenge">' +
-          "Join Challenge here"+
+           const contentString ='<div id="join_challenge">' + '<a style="color:white" href="../Challenge/partecipa_challenge.php?username='+username +
+          '&id='+id+ '">'+
+          "Join Challenge here"+'</a>'+
           "</div>";
+        
           const infowindow = new google.maps.InfoWindow({
             content: contentString
           });
@@ -81,13 +83,7 @@ if (url.searchParams.has("l") == true)
           infowindow.addListener('closeclick', ()=>{
             // Handle focus manually.
           });
-          const create=document.getElementById("create_challenge");
-            google.maps.event.addDomListener(create, "click", () => {
-              var url_string = window.location.href;
-              var url = new URL(url_string);
-              var username = url.searchParams.get("username"); 
-              location.href = "partecipa_challenge.php?username="+username+"&id="+id;
-            });
+          
         });
     
       
@@ -206,7 +202,7 @@ window.initMap = initMap;
     margin: 0;
     padding: 0;
   }
-  #create_challenge {
+  #create_challenge,#join_challenge {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 16px;
