@@ -99,11 +99,11 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
             $picture=$l['picture'];
             if($user == $username){
               $chat.= '<div class=\"user_msg\">'.
-             $msg. '<img class = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
+              '<div class = \"msg_text\">'.$msg.'</div>'.'<img class = \"profile_picture\" src=\"'.$picture.'\"></div>';
             }
             else{
               $chat.= '<div class=\"msg\">'.
-               $msg. '<img class = \"post-profile_picture\" src=\"'.$picture.'\"></div>';
+               '<img class = \"profile_picture\" src=\"'.$picture.'\">'.'<div class = \"msg_text_r\">'.$msg.'</div></div>';
             }
           }
 
@@ -132,7 +132,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
       ?>
 
       </div>
-      
+
       <!--------OTHER_CHALLENGES-------->
       <div id="other_challenges">
         <div class="titolo-sezione" >OTHER CHALLENGES</div>
@@ -150,7 +150,8 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
           echo '<div class="challenge">';
           echo '<form method = "POST" action = "./partecipa_challenge.php?username=' . $username . '&id=' . $challenge_id . '">';
               echo '<input type = "submit" class = "partecipa" name = "partecipa-btn" value = "PARTECIPA" />';
-              echo '</form>';
+            echo '</form>';
+          echo '<a  class = \"nav-link\" href=\"../Mappa/index.php?username='.$username.'&id='.$challenge_id.'&l='.$luogo.'\" >CHALLENGE LOCATION </a>';
           echo '</div>';
         }
         ?>
@@ -179,17 +180,17 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
             $picture=$l['picture'];
             if($user == $username){
               $chat.= '<div class=\"user_msg\">'.
-             $msg. '<img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
+             '<div class = \"msg_text\">'.$msg. '</div><img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
             }
             else{
               $chat.= '<div class=\"msg\">'.
-               $msg. '<img class=\"profile_picture\" src=\"'.$picture.'\"></div>';
+               '<img class=\"profile_picture\" src=\"'.$picture.'\"><div class = \"msg_text_r\">'.$msg.'</div></div>';
             }
 
           }
 
           //INPUT FOR MSG
-          $chat .= '<div id=\"send_message\"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
+          $chat .= '<div id="send_message"><form action=\"send_message.php?username='.$username.'&id='.$challenge_id.'\" method =\"post\" name=\"msg_form\">"+
           "<input type=\"text\" name=\"input_msg\" class=\"input_msg\" autocomplete = \"off\">"+
           "<input type=\"submit\"  id=\"send-btn\" name=\"send-btn\" value=\"SEND\">"+
           "</form></div>";';
@@ -199,9 +200,8 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
             var div = document.querySelector("#chat");
             '.$chat.'
             div.innerHTML=chat;
-            
-            
             </script>';  
+            
             echo $chat_HTML;
           }        
         }

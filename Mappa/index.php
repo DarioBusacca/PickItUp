@@ -28,7 +28,74 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
   </head>
   <script type="text/javascript">
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+if (url.searchParams.has("l") == true)  
+{
+
   function initMap() {
+      const id=url.searchParams.get('id');
+      document.querySelector(".titolo-sezione").textContent = "CHALLENGE N°"+id;
+      const luogo=url.searchParams.get('l');
+      const arr = luogo.split(':');
+      let lat =arr[0] ;
+      let lng = arr[1];
+      let rad =parseInt(arr[2]);
+      const myLatlng = new google.maps.LatLng(lat,lng);
+      alert(myLatlng);
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: myLatlng,
+        mapTypeId: 'terrain',
+      });
+      const challenge_zone = new google.maps.Circle({
+          strokeColor: "red",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "blue",
+          fillOpacity: 0.35,
+          map:map,
+          radius: rad,
+          center: myLatlng,
+          editable : false,
+          draggable : false,
+        });
+        challenge_zone.addListener('click', () => {
+           const contentString ='<div id="create_challenge">' +
+          "Join Challenge here"+
+          "</div>";
+          const infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          const marker= new google.maps.Marker({
+            position:myLatlng,
+            map:map,
+          });
+          infowindow.open({
+            anchor: marker,
+            position:myLatlng,
+            map:map,
+            shouldFocus: false,
+          });
+         
+          infowindow.addListener('closeclick', ()=>{
+            // Handle focus manually.
+          });
+          const create=document.getElementById("create_challenge");
+            google.maps.event.addDomListener(create, "click", () => {
+              var url_string = window.location.href;
+              var url = new URL(url_string);
+              var username = url.searchParams.get("username"); 
+              location.href = "partecipa_challenge.php?username="+username+"&id="+id;
+            });
+        });
+    
+      
+    }
+
+}else{
+  function initMap() {
+     document.querySelector(".titolo-sezione").textContent = "SELECT AREA TO PICKIPUP!";
     const myLatlng = { lat: 41.9028, lng: 12.4964 };
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 11,
@@ -125,9 +192,11 @@
           marker.setMap(null);
       });
   }
+}
    
-  window.initMap = initMap;
+window.initMap = initMap;
 </script>
+
   <style>
   #map {
     height: 100%;
@@ -179,14 +248,14 @@
   </div>
 
 
-    <div class="titolo-sezione">Select the area to PickItUp!</div>
+    <div class="titolo-sezione"></div>
    
 
 
     <div id="map"></div>
 
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi8CmuXD9MXfJzfHjU2lFv_Xc9UyQu2qY&callback=initMap">
     </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 .banner{
 	background-color:#35682d;
 	padding: 10px 0 10px 0;
@@ -121,7 +122,7 @@ div#hormenu li:hover ul{
 	background: #35682d;
 }
 div#hormenu li li {border: none; ;}
-div#hormenu li li a {padding: 2px 2px 2px 10px;}
+div#hormenu li li a {font-size: 20px; padding: 2px 2px 2px 10px;}
 
 .site-action {
 	width: 100%;
@@ -229,7 +230,8 @@ div#hormenu li li a {padding: 2px 2px 2px 10px;}
 	display: flex;
 	align-items: center;
 	padding: 0;
-	background-color: #35682d;
+	background-color: #cad7cb;
+	border-radius: 4px 4px 0 0;
 }
 
 .post_banner-username{
@@ -320,8 +322,10 @@ span[ class *= 'dot_'] {
 	flex-direction: column;
 	max-width: 300px;
 	align-items: center;
-	border-style: hidden solid hidden solid;
+	border-style: hidden ;
 	border-color: lightgrey;
+	background-color: #ede6e6;
+	background-blend-mode:lighten ;
 }
 .award_item {
 	width: 100%;
@@ -367,12 +371,47 @@ i.uil-coins{
 Tablet
 ****************************/
 @media (max-width: 998px){
-	/*TODO*/
+
 }
 
 /****************************
 Smartphone
 ****************************/
-@media (max-width: 767px){
-	/*TODO*/
+@media (max-width: 768px){
+	.searchbar{
+		display: none;
+	}
+	.awards{
+		display: none;
+	}
+
+	.banner{
+		width: 100%;
+		padding: 0;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.nav-link{
+		display: flex;
+	}
+	.post{
+		display: flex;
+		flex-direction: column;
+	}
+
+
+	.leaderboard{display: none;}
+
+	.profile_picture{
+	border-radius: 50%;
+	border-style: solid;
+	border-color: white;
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+	margin-top: 5px;
+	}
+	.nav-link{display: none;}
+	
 }

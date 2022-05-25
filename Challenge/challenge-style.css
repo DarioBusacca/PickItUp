@@ -12,11 +12,13 @@ main {
 	display: -webkit-flex;
 	flex-direction: row;
   	text-align: center;
+	  background-color: whitesmoke;
 }
 .challenges {
 	display: flex;
 	flex-direction: column;
-	height: 700px;
+	min-height: 700px;
+	width: 50%;
 	/* flex-grow: 3; */
 	overflow-y: auto;
 	border-style: none;
@@ -34,10 +36,9 @@ main {
 
 	border-style: hidden;
 	border-color: darkgrey;
-	background-image: url(./Media/istockphoto-514941228-612x612.jpg);
+	background-image: url(./Media/istockphoto-514941228-612x612.jpeg);
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-blend-mode: lighten;
 }
 
 .your_challenges{
@@ -46,14 +47,20 @@ main {
 	display: flex;
 	flex-direction: column;
 }
+
+.challenge{
+	display: flex;
+	flex-direction: row;
+}
+
 div[id^="challenge_active_"] {
     height: 70px;
-    width: 300px;
-    border-style: hidden;
+    width: 80%;
+    border-style:ridge;
 	background-color: #ccc;
     cursor: pointer;
-    margin: 10px;
-	border-radius: 20%;
+    margin: auto;
+	border-radius: 50%;
 }
 .challenge_text{
 	margin-top: 20px;
@@ -61,16 +68,54 @@ div[id^="challenge_active_"] {
 }
 
 #chat_banner{
-	display: flex;
+	display: none;
 	border-style: hidden;
     border-color: black;
 }
 
 #send_message{
 	display: flex;
+	margin: auto;
 	align-content: center;
+	
 	border-style: hidden;
     border-color: black;
+}
+
+.msg{
+	display: flex;
+	max-width: 200px;
+	min-height: auto;
+	flex-direction: row;
+}
+.user_msg{
+	display: flex;
+	max-width: 200px;
+	min-height: auto;
+	flex-direction: row;
+	margin-inline-start: auto;
+}
+.msg_text{
+	text-align: -webkit-center;
+	border-style: none;
+	background-color: lightgreen;
+	border-radius: 40%;
+	align-items: center;
+	display: flex;
+	font-size: 24px;
+	padding: 5px 5px;
+	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.msg_text_r{
+	text-align: -webkit-center;
+	border-style: none;
+	background-color: greenyellow;
+	border-radius: 40%;
+	align-items: center;
+	display: flex;
+	font-size: 24px;
+	padding: 5px 5px;
+	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #send-btn{
