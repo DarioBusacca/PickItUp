@@ -1,3 +1,5 @@
+/* Slideshow per scorrere le foto nei post */
+
 let slideIndexes = {};
 
 function initSlideShow(s){

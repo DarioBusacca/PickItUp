@@ -46,7 +46,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=PickItUp
 				<li>
 					<a href = "#"> Settings </a>
 					<ul>
-						<li> <a href = "./Login/login.html"> Log Out </a></li> 
+						<li> <a href = "../Login/login.html"> Log Out </a></li> 
 						<li> <a href = "#"> MyAccount </li> </a>
 					</ul>
 				</li>

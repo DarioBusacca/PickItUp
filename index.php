@@ -37,7 +37,7 @@
 <body>
 <!--BANNER-->
 	<div class="banner">
-    	<a class="logo" href = "../index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
+    	<a class="logo" href = "./index.php?username=<?php echo $username?>" style="text-decoration: none">PICKITUP</a>
 		<form class="searchbar" name="searchbar" method="POST" action="search.php">
 			<input type="text" class="search" name="search" placeholder="Search">
 			<i style="color:white;"class="uil uil-search"></i>
