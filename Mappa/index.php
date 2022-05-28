@@ -254,7 +254,7 @@ window.initMap = initMap;
     <div id="map"></div>
 
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi8CmuXD9MXfJzfHjU2lFv_Xc9UyQu2qY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 </body>
 </html>
